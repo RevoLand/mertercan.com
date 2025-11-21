@@ -1,0 +1,91 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "never",
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.fontLigatures": true,
+  "editor.formatOnSave": true,
+  "editor.guides.bracketPairs": "active",
+  "files.associations": {
+    "*.css": "tailwindcss",
+    "*.scss": "tailwindcss"
+  },
+  "module-templates.engine": "handlebars",
+  "module-templates.templates": {
+    "react-component": {
+      "defaultPath": "components",
+      "displayName": "React component",
+      "files": [
+        {
+          "content": [
+            "import React from 'react';",
+            "",
+            "const {{pascal name}} = () => {",
+            "",
+            "  return (",
+            "    <div>{{pascal name}}</div>",
+            "  );",
+            "};",
+            "",
+            "export default {{pascal name}};",
+            ""
+          ],
+          "name": "{{pascal name}}.tsx"
+        },
+        {
+          "content": [
+            "export { default } from './{{pascal name}}';",
+            ""
+          ],
+          "name": "index.tsx"
+        }
+      ],
+      "folder": "{{pascal name}}",
+      "questions": {
+        "name": "Component name"
+      }
+    },
+    "react-component-with-module-scss": {
+      "defaultPath": "components",
+      "displayName": "React component with module scss",
+      "files": [
+        {
+          "content": [
+            "import React from 'react';",
+            "import styles from './{{pascal name}}.module.scss';",
+            "",
+            "const {{pascal name}} = () => {",
+            "",
+            "  return (",
+            "    <div>{{pascal name}}</div>",
+            "  );",
+            "};",
+            "",
+            "export default {{pascal name}};",
+            ""
+          ],
+          "name": "{{pascal name}}.tsx"
+        },
+        {
+          "content": [
+            ".{{kebab name}} {",
+            "",
+            "}"
+          ],
+          "name": "{{pascal name}}.module.scss"
+        },
+        {
+          "content": [
+            "export { default } from './{{pascal name}}';",
+            ""
+          ],
+          "name": "index.tsx"
+        }
+      ],
+      "folder": "{{pascal name}}",
+      "questions": {
+        "name": "Component name"
+      }
+    }
+  }
+}
