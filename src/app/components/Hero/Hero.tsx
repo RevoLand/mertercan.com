@@ -7,7 +7,7 @@ const Hero = () => {
 
       <p className='text-ink/90 mt-6 leading-[1.78]! tracking-tight md:max-w-[590px]! md:leading-[1.72]!'>
         I’m a frontend developer exploring how small things grow into meaning — in the things I create, the worlds I
-        imagine, and the way I grow.
+        build, and the way I grow.
       </p>
 
       <p className='text-ink/75 mt-4 text-sm! italic md:max-w-[520px]!'>

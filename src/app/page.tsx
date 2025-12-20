@@ -41,8 +41,8 @@ export default function Home() {
           <div>
             <h3 className='mb-3'>Tiny Creative Worlds</h3>
             <p>
-              I enjoy experimenting with small ideas that quietly grow into their own little spaces — like the Toffee &
-              Rozi universe. These help me stay curious, creative, and connected to the softer side of making.
+              Some characters begin as quiet gestures of care. Over time, they grow into gentle, character-led worlds —
+              like Toffee, Rozi, and Fluffy. They stay close to tenderness, curiosity, and a softer way of making.
             </p>
           </div>
         </div>
@@ -55,9 +55,8 @@ export default function Home() {
           <div>
             <h3 className='mb-3'>Creative Projects</h3>
             <p>
-              I like exploring small creative ideas that quietly grow into little worlds — like the Toffee & Rozi
-              universe. Most begin as simple curiosities and become playful places with their own rhythm and
-              personality.
+              I like exploring small creative ideas that grow into little worlds — character-led projects like Toffee,
+              Rozi, and Fluffy. Most begin quietly, then take shape and develop their own rhythm and personality.
             </p>
           </div>
           <div>
