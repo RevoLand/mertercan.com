@@ -42,6 +42,16 @@ type Entry = {
 
 const entries: Entry[] = [
   {
+    date: 'July 2026',
+    intro:
+      'A long piece of writing made a small friction impossible to ignore. By the end of the day, it had become a public tool.',
+    notes: [
+      'Built and launched Dizgi, a browser-based tool that turns long-form writing into carefully paginated images and PDFs without rewriting the text.',
+      'The first usable version went from idea to a live product in one day, with rendered-layout pagination, intentional page breaks, typography and background controls, previews, and image and PDF export.',
+      'Added Dizgi to Selected Work and gave it a dedicated /making page.',
+    ],
+  },
+  {
     date: 'June 2026',
     intro:
       'A lot had been building quietly. Projects existed but the site had not caught up yet. This update was mostly about closing that gap.',

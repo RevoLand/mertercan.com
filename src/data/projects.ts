@@ -63,6 +63,41 @@ export const projects = [
     tags: ['extension', 'architecture', 'tooling'],
   },
   {
+    slug: 'dizgi',
+    title: 'Dizgi',
+    context:
+      'A writing tool that turns long-form text into carefully paginated images and PDFs without rewriting the words.',
+    metaDescription:
+      'Dizgi is a browser-based writing tool by Mert Ercan for turning long-form text into carefully paginated, shareable images and PDFs.',
+    year: '2026',
+    publishedAt: '2026-07-04',
+    updatedAt: '2026-07-05',
+    type: 'Writing and export tool',
+    status: 'live',
+    schemaType: 'WebApplication',
+    role: 'Concept, product design, and development',
+    group: 'larger',
+    kind: 'tool',
+    story: [
+      'Dizgi began while I was reading a long piece of writing shared as a series of screenshots. It felt like a small window into another person’s inner world; the writing held my attention, while the format kept interrupting it. I had felt the same friction while preparing my own writing in Canva, where every page break and layout adjustment had to be handled manually.',
+      'I built the first usable version in a day around a simple boundary: the tool should shape the text, not rewrite it. Dizgi measures the rendered layout, flows writing across pages, respects intentional page breaks, and updates the result as the format, typography, spacing, and background change.',
+      'The finished pages can be previewed and exported as images or a PDF. The aim is not to turn writing into content strategy, but to make the original words easier to read, share, and keep.',
+    ],
+    reflections: [
+      'Formatting can support a voice without becoming another voice.',
+      'Automatic layout is most useful when the writer can still decide where a page should end.',
+      'A small reading friction can become a useful tool once it is made visible.',
+    ],
+    proofPoints: [
+      'Pagination responds to the rendered layout rather than relying on a fixed character count.',
+      'Writers can combine automatic flow with intentional page breaks and adjust format, typography, spacing, and background before exporting.',
+      'Pages can be previewed and exported individually or together as images and a PDF.',
+      'Dizgi preserves the source text instead of rewriting it or adding hooks, summaries, and calls to action.',
+    ],
+    links: [{ label: 'dizgi.app', href: 'https://dizgi.app' }],
+    tags: ['writing', 'pagination', 'typography'],
+  },
+  {
     slug: 'haklisin',
     title: 'Haklısın!',
     context:

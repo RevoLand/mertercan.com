@@ -73,6 +73,18 @@ export default function Home() {
           </div>
 
           <div>
+            <h3 className='mb-3 flex items-center gap-2'>
+              <Link href='/making/dizgi' className='text-ink hover:text-ink/70 no-underline'>
+                Dizgi
+              </Link>
+            </h3>
+            <p>
+              A writing tool that turns long-form text into carefully paginated images and PDFs without rewriting the
+              words.
+            </p>
+          </div>
+
+          <div>
             <h3 className='mb-3 flex flex-wrap items-center gap-2'>
               <Link href='/making/steam-library-manager' className='text-ink hover:text-ink/70 no-underline'>
                 Steam Library Manager
