@@ -1,4 +1,5 @@
 import type { Project } from '@/data/projects';
+import type { Essay } from '@/data/essays';
 
 export const siteUrl = 'https://mertercan.com';
 export const websiteId = `${siteUrl}/#website`;
@@ -133,6 +134,68 @@ export function buildProjectJsonLd(project: Project): { '@context': string; '@gr
         { name: project.title, url: projectUrl },
       ]),
       projectNode,
+    ],
+  };
+}
+
+export function getEssayUrl(essay: Essay): string {
+  return `${siteUrl}/writing/denemeler/${essay.slug}`;
+}
+
+export function buildWritingJsonLd(): { '@context': string; '@graph': JsonLdNode[] } {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      buildBreadcrumbJsonLd([
+        { name: 'Home', url: siteUrl },
+        { name: 'Writing', url: `${siteUrl}/writing` },
+      ]),
+      {
+        '@type': 'CollectionPage',
+        '@id': `${siteUrl}/writing#page`,
+        url: `${siteUrl}/writing`,
+        name: 'Writing',
+        description: 'Notes, essays, and small conversations by Mert Ercan, kept somewhere quieter than the feed.',
+        inLanguage: 'en',
+        isPartOf: {
+          '@id': websiteId,
+        },
+        author: {
+          '@id': personId,
+        },
+      },
+    ],
+  };
+}
+
+export function getEssaySeoDescription(essay: Essay): string {
+  return `${essay.title} is part ${essay.position} of Denemeler, a Turkish essay series by Mert Ercan.`;
+}
+
+export function buildEssayJsonLd(essay: Essay): { '@context': string; '@graph': JsonLdNode[] } {
+  const essayUrl = getEssayUrl(essay);
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      buildBreadcrumbJsonLd([
+        { name: 'Home', url: siteUrl },
+        { name: 'Writing', url: `${siteUrl}/writing` },
+        { name: essay.title, url: essayUrl },
+      ]),
+      {
+        '@type': 'CreativeWork',
+        '@id': `${essayUrl}#essay`,
+        url: essayUrl,
+        name: essay.title,
+        description: getEssaySeoDescription(essay),
+        inLanguage: 'tr',
+        position: essay.position,
+        datePublished: essay.date,
+        author: {
+          '@id': personId,
+        },
+      },
     ],
   };
 }

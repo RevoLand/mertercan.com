@@ -152,7 +152,7 @@ const eslintConfig = defineConfig([
       'no-duplicate-imports': ['warn'], // https://eslint.org/docs/rules/no-duplicate-imports
       'template-curly-spacing': ['warn'], // https://eslint.org/docs/rules/template-curly-spacing
       'no-nested-ternary': ['warn'], // https://eslint.org/docs/rules/no-nested-ternary
-      quotes: ['warn', 'single'], // https://eslint.org/docs/rules/quotes
+      quotes: ['warn', 'single', { avoidEscape: true }], // https://eslint.org/docs/rules/quotes
       'no-case-declarations': 'off',
       'no-unused-vars': 'warn',
     },

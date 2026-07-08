@@ -1,16 +1,17 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme inline {
-  --color-background: #FAF7F2;
-  --color-ink: #2A2A2A;
-  --color-accent: #B89C74;
+  --color-background: #faf7f2;
+  --color-ink: #2a2a2a;
+  --color-accent: #b89c74;
 }
 
 @utility container-base {
-  @apply max-w-2xl mx-auto px-8 md:px-6;
+  @apply max-w-2xl mx-auto px-6 sm:px-8 md:px-6;
 }
 
-html, body {
+html,
+body {
   background: var(--color-background);
   color: var(--color-ink);
 }
@@ -21,7 +22,9 @@ body {
 }
 
 /* Headings — Global, consistent, elegant */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   @apply font-medium tracking-tight text-ink;
 }
 
@@ -54,6 +57,52 @@ a:hover {
   @apply text-ink;
 }
 
+.skipLink {
+  @apply bg-background text-ink border-ink/10 absolute top-4 left-4 z-50 -translate-y-[150%] rounded-sm border px-3 py-2 text-sm no-underline shadow-sm transition-transform;
+}
+
+.skipLink:focus-visible {
+  @apply translate-y-0 outline-2 outline-offset-2 outline-accent;
+}
+
+.siteHeader {
+  @apply flex items-center justify-between gap-4 pt-5 text-sm leading-none md:pt-7 md:text-[0.8125rem];
+}
+
+.siteNav {
+  @apply text-ink/45 flex flex-wrap items-center justify-end gap-x-2.5 gap-y-1.5 sm:gap-x-4;
+}
+
+.siteHeader a,
+.siteHeader a:visited {
+  text-decoration: none;
+  touch-action: manipulation;
+}
+
+.siteHeader a:hover,
+.siteHeader a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.siteHeaderLink {
+  @apply text-ink/60 decoration-ink/20 transition-colors hover:text-ink/85 focus-visible:text-ink/85;
+}
+
+.siteHeaderLink.is-current {
+  @apply text-ink/85 underline decoration-ink/20 underline-offset-[0.18em];
+}
+
+@media (max-width: 520px) {
+  .siteHeader {
+    @apply flex-col items-start gap-2;
+  }
+
+  .siteNav {
+    @apply justify-start gap-x-2.5;
+  }
+}
+
 /* Text selection */
 ::selection {
   background: var(--color-accent);
@@ -63,6 +112,18 @@ a:hover {
 /* Divider */
 .section-divider {
   @apply border-t border-ink/5;
+}
+
+.essay-dialogue {
+  @apply mt-14 mb-16 max-w-[680px] md:mt-16 md:mb-20;
+}
+
+.essay-dialogue p {
+  @apply text-ink/85 m-0 leading-[1.9]!;
+}
+
+.essay-dialogue p + p {
+  @apply mt-[1.05rem];
 }
 
 /* Footer signature line */

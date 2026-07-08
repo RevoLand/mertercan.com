@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Footer from '@/app/components/Footer';
 import { projects, getProjectBySlug } from '@/data/projects';
-import { buildProjectJsonLd, getProjectDescription, siteName } from '@/lib/seo';
+import { buildProjectJsonLd, getProjectDescription, siteName, siteUrl } from '@/lib/seo';
 import MakingDetail from './MakingDetail';
 
 type Props = {
@@ -26,6 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const description = getProjectDescription(project);
 
   return {
+    metadataBase: new URL(siteUrl),
     title: project.title,
     description,
     alternates: {

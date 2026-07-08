@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import Footer from '../components/Footer';
-import { siteName } from '@/lib/seo';
+import Footer from '@/app/components/Footer';
+import { siteName, siteUrl } from '@/lib/seo';
 
 const description = 'A quiet record of how this site — and I — grow.';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: 'Life',
   description,
   alternates: {
@@ -44,11 +44,13 @@ const entries: Entry[] = [
   {
     date: 'July 2026',
     intro:
-      'A long piece of writing made a small friction impossible to ignore. By the end of the day, it had become a public tool.',
+      'Writing changed shape in two small ways. One piece became a public tool. A few older essays found their place on the site.',
     notes: [
       'Built and launched Dizgi, a browser-based tool that turns long-form writing into carefully paginated images and PDFs without rewriting the text.',
       'The first usable version went from idea to a live product in one day, with rendered-layout pagination, intentional page breaks, typography and background controls, previews, and image and PDF export.',
       'Added Dizgi to Selected Work and gave it a dedicated /making page.',
+      'Added /writing as a quieter place for notes, essays, and small conversations.',
+      'Brought the Turkish Denemeler series into the site without turning the whole site multilingual.',
     ],
   },
   {
@@ -68,11 +70,6 @@ export default function Life() {
   return (
     <main className='min-h-screen'>
       <section className='container-base pt-14 pb-24 md:pt-20 md:pb-[150px]'>
-        <div className='mb-10 md:mb-14'>
-          <Link href='/' className='text-ink/40 hover:text-ink/60 text-sm no-underline transition-colors'>
-            ← home
-          </Link>
-        </div>
         <h1 className='mb-3'>Life</h1>
         <p className='text-ink/50 mt-0! mb-16 text-sm! italic md:mb-20'>
           A quiet record of how this site — and I — grow.

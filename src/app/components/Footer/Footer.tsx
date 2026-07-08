@@ -1,6 +1,3 @@
-import React from 'react';
-import Link from 'next/link';
-
 const Footer = () => {
   return (
     <footer className='container-base space-y-8 py-14 text-center md:py-[60px]'>
@@ -9,10 +6,6 @@ const Footer = () => {
       </p>
 
       <div className='text-ink/50 flex justify-center gap-5 md:gap-8'>
-        <a href='https://www.pinterest.com/mertcreates' target='_blank' rel='noopener noreferrer'>
-          Pinterest
-        </a>
-
         <a href='https://github.com/mertcreates' target='_blank' rel='noopener noreferrer'>
           GitHub / mertcreates
         </a>
@@ -24,14 +17,13 @@ const Footer = () => {
         <a href='https://x.com/Mert_Ercan' target='_blank' rel='noopener noreferrer'>
           X
         </a>
+
+        <a href='https://www.pinterest.com/mertcreates' target='_blank' rel='noopener noreferrer'>
+          Pinterest
+        </a>
       </div>
 
-      <p className='footer-note mt-4 text-xs!'>
-        made with clarity, curiosity, and a little care —{' '}
-        <Link href='/life' className='hover:text-ink/60 no-underline transition-colors'>
-          life
-        </Link>
-      </p>
+      <p className='footer-note mt-4 text-xs!'>made with clarity, curiosity, and a little care</p>
     </footer>
   );
 };

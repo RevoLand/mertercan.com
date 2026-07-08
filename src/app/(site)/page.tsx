@@ -1,7 +1,7 @@
-import Footer from './components/Footer';
-import Hero from './components/Hero';
 import Link from 'next/link';
-import Section from './components/Section';
+import Footer from '@/app/components/Footer';
+import Hero from '@/app/components/Hero';
+import Section from '@/app/components/Section';
 import { buildHomeJsonLd } from '@/lib/seo';
 
 const jsonLd = buildHomeJsonLd();

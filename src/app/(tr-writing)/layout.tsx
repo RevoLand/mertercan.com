@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from 'next';
 import { Poppins } from 'next/font/google';
 import Script from 'next/script';
+import SiteNav from '@/app/components/SiteNav';
 import { siteDescription, siteName, siteTitle, siteUrl } from '@/lib/seo';
-import './globals.css';
+import '../globals.css';
 
 // eslint-disable-next-line new-cap
 export const poppins = Poppins({
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   weight: ['400', '500', '600'],
   style: ['normal', 'italic'],
 });
@@ -19,9 +20,6 @@ export const metadata: Metadata = {
   },
   description: siteDescription,
   metadataBase: new URL(siteUrl),
-  alternates: {
-    canonical: '/',
-  },
   authors: [{ name: siteName, url: siteUrl }],
   creator: siteName,
   publisher: siteName,
@@ -30,7 +28,7 @@ export const metadata: Metadata = {
     description: siteDescription,
     url: '/',
     siteName,
-    locale: 'en_US',
+    locale: 'tr_TR',
     type: 'website',
     images: [
       {
@@ -58,15 +56,21 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
-export default function RootLayout({
+export default function TurkishWritingLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='tr'>
       <body className={`${poppins.className} antialiased`}>
-        {children}
+        <a href='#main-content' className='skipLink' lang='en'>
+          Skip to content
+        </a>
+        <SiteNav />
+        <div id='main-content' tabIndex={-1}>
+          {children}
+        </div>
         <Script id='quiet-nod'>
           {
             'if (!window._q) { window._q = true; console.log("you found the quiet part.\\n\\nmaybe we care about the same small things.\\n\\nme@mertercan.com"); }'

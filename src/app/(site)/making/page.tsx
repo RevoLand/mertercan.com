@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Footer from '../components/Footer';
+import Footer from '@/app/components/Footer';
 import { projects } from '@/data/projects';
 import { buildBreadcrumbJsonLd, siteName, siteUrl } from '@/lib/seo';
 
@@ -14,6 +14,7 @@ const breadcrumbJsonLd = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: 'Making',
   description,
   alternates: {
@@ -50,12 +51,6 @@ export default function Making() {
     <main className='min-h-screen'>
       <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <section className='container-base pt-14 pb-24 md:pt-20 md:pb-[150px]'>
-        <div className='mb-10 md:mb-14'>
-          <Link href='/' className='text-ink/40 hover:text-ink/60 text-sm no-underline transition-colors'>
-            ← home
-          </Link>
-        </div>
-
         <h1 className='mb-3'>Making</h1>
         <p className='text-ink/50 mt-0! mb-16 text-sm! italic md:mb-20'>
           Things I have made — small and larger, tools and products, quiet and continuing.
