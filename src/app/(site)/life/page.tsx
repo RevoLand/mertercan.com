@@ -44,13 +44,14 @@ const entries: Entry[] = [
   {
     date: 'July 2026',
     intro:
-      'Writing changed shape in two small ways. One piece became a public tool. A few older essays found their place on the site.',
+      'Writing changed shape this month. One piece became a public tool. A few essays found their place on the site, and the conversation continued.',
     notes: [
       'Built and launched Dizgi, a browser-based tool that turns long-form writing into carefully paginated images and PDFs without rewriting the text.',
       'The first usable version went from idea to a live product in one day, with rendered-layout pagination, intentional page breaks, typography and background controls, previews, and image and PDF export.',
       'Added Dizgi to Selected Work and gave it a dedicated /making page.',
       'Added /writing as a quieter place for notes, essays, and small conversations.',
       'Brought the Turkish Denemeler series into the site without turning the whole site multilingual.',
+      'Added Dostluk 2 as the next part of the Turkish Denemeler series.',
     ],
   },
   {
