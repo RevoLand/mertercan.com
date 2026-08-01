@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import Footer from '@/app/components/Footer';
 import { siteName, siteUrl } from '@/lib/seo';
 
@@ -37,7 +38,15 @@ export const metadata: Metadata = {
 type Entry = {
   date: string;
   intro?: string;
-  notes: string[];
+  notes: LifeNote[];
+};
+
+type LifeNote = {
+  text: string;
+  relatedLink?: {
+    href: string;
+    label: string;
+  };
 };
 
 const entries: Entry[] = [
@@ -46,12 +55,27 @@ const entries: Entry[] = [
     intro:
       'Writing changed shape this month. One piece became a public tool. A few essays found their place on the site, and the conversation continued.',
     notes: [
-      'Built and launched Dizgi, a browser-based tool that turns long-form writing into carefully paginated images and PDFs without rewriting the text.',
-      'The first usable version went from idea to a live product in one day, with rendered-layout pagination, intentional page breaks, typography and background controls, previews, and image and PDF export.',
-      'Added Dizgi to Selected Work and gave it a dedicated /making page.',
-      'Added /writing as a quieter place for notes, essays, and small conversations.',
-      'Brought the Turkish Denemeler series into the site without turning the whole site multilingual.',
-      'Added Dostluk 2 as the next part of the Turkish Denemeler series.',
+      {
+        text: 'Built and launched Dizgi, a browser-based tool that turns long-form writing into carefully paginated images and PDFs without rewriting the text.',
+        relatedLink: { href: '/making/dizgi', label: 'Dizgi' },
+      },
+      {
+        text: 'The first usable version went from idea to a live product in one day, with rendered-layout pagination, intentional page breaks, typography and background controls, previews, and image and PDF export.',
+      },
+      {
+        text: 'Added Dizgi to Selected Work and gave it a dedicated /making page.',
+      },
+      {
+        text: 'Added /writing as a quieter place for notes, essays, and small conversations.',
+        relatedLink: { href: '/writing', label: 'Writing' },
+      },
+      {
+        text: 'Brought the Turkish Denemeler series into the site without turning the whole site multilingual.',
+      },
+      {
+        text: 'Added Dostluk 2 as the next part of the Turkish Denemeler series.',
+        relatedLink: { href: '/writing/denemeler/dostluk-2', label: 'Dostluk 2' },
+      },
     ],
   },
   {
@@ -59,10 +83,19 @@ const entries: Entry[] = [
     intro:
       'A lot had been building quietly. Projects existed but the site had not caught up yet. This update was mostly about closing that gap.',
     notes: [
-      'Added BugJar, Haklısın!, Kombin.dev, Project Canon, and two ESLint plugins to Selected Work. Built dedicated /making pages for each, and stripped away the "marketing" voice in favor of a calm, structural record.',
-      "The creative characters (Toffee, Rozi, Fluffy) moved into the background. The approach stayed; the names didn't need to.",
-      '"How I Grow" got a second paragraph. It needed more room.',
-      'This page — as a place to remember what was here and what changed.',
+      {
+        text: 'Added BugJar, Haklısın!, Kombin.dev, Project Canon, and two ESLint plugins to Selected Work. Built dedicated /making pages for each, and stripped away the "marketing" voice in favor of a calm, structural record.',
+        relatedLink: { href: '/making', label: 'Selected Work' },
+      },
+      {
+        text: "The creative characters (Toffee, Rozi, Fluffy) moved into the background. The approach stayed; the names didn't need to.",
+      },
+      {
+        text: '"How I Grow" got a second paragraph. It needed more room.',
+      },
+      {
+        text: 'This page — as a place to remember what was here and what changed.',
+      },
     ],
   },
 ];
@@ -84,7 +117,15 @@ export default function Life() {
               <ul className='space-y-2.5'>
                 {entry.notes.map((note, i) => (
                   <li key={i} className="before:text-ink/30 text-ink/80 list-none before:mr-3 before:content-['-']">
-                    {note}
+                    {note.text}
+                    {note.relatedLink && (
+                      <Link
+                        href={note.relatedLink.href}
+                        className='text-ink/45 hover:text-ink/75 ml-2 text-sm no-underline transition-colors'
+                      >
+                        {note.relatedLink.label} →
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
