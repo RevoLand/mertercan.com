@@ -5,7 +5,10 @@ import { siteUrl } from '@/lib/seo';
 
 export const dynamic = 'force-static';
 
-const metadataLastModified = '2026-06-26';
+const metadataLastModified = [
+  ...projects.map((project) => project.updatedAt),
+  ...essays.map((essay) => essay.date),
+].reduce((latest, date) => (date > latest ? date : latest));
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

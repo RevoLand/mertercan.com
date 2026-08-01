@@ -51,7 +51,7 @@ export default function Writing() {
           <h2 className='mb-4 text-[1.45rem]! md:text-[1.75rem]!'>Denemeler</h2>
           <p lang='tr' className='text-ink/70 mb-12 max-w-[58ch] md:mb-14'>
             Düşünce, ölüm, özgecilik, insan doğası ve dostluk üzerine; zamanında yazarlığa giriş eğitimleri sırasında
-            karaladığım beş küçük diyalog denemesi.
+            karaladığım {essays.length} küçük diyalog denemesi.
           </p>
 
           <div className='space-y-7 md:space-y-8'>
