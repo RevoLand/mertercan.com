@@ -89,7 +89,7 @@ export default function Home() {
               <Link href='/making/steam-library-manager' className='text-ink hover:text-ink/70 no-underline'>
                 Steam Library Manager
               </Link>
-              <span className='text-ink/40 text-sm font-normal'>2015–2025</span>
+              <span className='text-ink/70 text-sm font-normal'>2015–2025</span>
             </h3>
             <p>A game library utility born from one friend&apos;s repeated trips between home and university.</p>
           </div>
@@ -108,7 +108,7 @@ export default function Home() {
               <Link href='/making/kombin' className='text-ink hover:text-ink/70 no-underline'>
                 Kombin.dev
               </Link>
-              <span className='text-ink/40 text-sm font-normal'>private</span>
+              <span className='text-ink/70 text-sm font-normal'>private</span>
             </h3>
             <p>
               A personal wardrobe system that builds and evaluates outfits from the clothes already there, without
@@ -121,7 +121,7 @@ export default function Home() {
               <Link href='/making/project-canon' className='text-ink hover:text-ink/70 no-underline'>
                 Project Canon
               </Link>
-              <span className='text-ink/40 text-sm font-normal'>private</span>
+              <span className='text-ink/70 text-sm font-normal'>private</span>
             </h3>
             <p>A private system for keeping character work coherent, movable, and ready to publish.</p>
           </div>
@@ -150,7 +150,7 @@ export default function Home() {
             missing, what could be gentler. Growth, for me, is less about milestones and more about the quality of
             attention.
           </p>
-          <ul className='text-ink/60 list-none space-y-1.5 md:space-y-2'>
+          <ul className='text-ink/75 list-none space-y-1.5 md:space-y-2'>
             <li className="before:text-ink/50 before:mr-3 before:content-['-']">I grow where I care</li>
             <li className="before:text-ink/50 before:mr-3 before:content-['-']">paying attention, softly</li>
             <li className="before:text-ink/50 before:mr-3 before:content-['-']">staying long enough to understand</li>

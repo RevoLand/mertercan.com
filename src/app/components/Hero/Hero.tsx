@@ -5,7 +5,7 @@ const Hero = () => {
     <section className='container-base pt-14 pb-24 md:pt-20 md:pb-[150px]'>
       <h1>Hey, I’m Mert.</h1>
 
-      <p className='text-ink/90 mt-6 leading-[1.78]! tracking-tight md:max-w-[590px]! md:leading-[1.72]!'>
+      <p className='text-ink/90 mt-6 leading-[1.78]! md:max-w-[590px]! md:leading-[1.72]!'>
         I’m Mert Ercan, a frontend developer exploring how small things grow into meaning — in the things I create, the
         worlds I build, and the way I grow.
       </p>

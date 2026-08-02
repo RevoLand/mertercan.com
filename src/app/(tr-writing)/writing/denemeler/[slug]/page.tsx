@@ -72,16 +72,16 @@ export default async function EssayPage({ params }: Props) {
       <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(essayJsonLd) }} />
       <article className='container-base pt-14 pb-24 md:pt-20 md:pb-[150px]'>
         <div className='mb-10 md:mb-14'>
-          <Link href='/writing' className='text-ink/40 hover:text-ink/60 text-sm no-underline transition-colors'>
+          <Link href='/writing' className='text-ink/70 hover:text-ink/85 text-sm no-underline transition-colors'>
             ← writing
           </Link>
         </div>
 
-        <p className='text-ink/35 mb-3 text-sm!'>
+        <p className='text-ink/70 mb-3 text-sm!'>
           {essay.position}. deneme · {essay.displayDate}
         </p>
         <h1 className='mb-4 text-[2.2rem]! md:text-[3.1rem]!'>{essay.title}</h1>
-        <p className='text-ink/55 mt-0! max-w-[620px] text-sm! italic'>{essay.description}</p>
+        <p className='text-ink/70 mt-0! max-w-[620px] text-sm! italic'>{essay.description}</p>
 
         <div className='essay-dialogue'>
           {essay.body.map((line, index) => (
@@ -94,7 +94,7 @@ export default async function EssayPage({ params }: Props) {
             {previous && (
               <Link
                 href={`/writing/denemeler/${previous.slug}`}
-                className='text-ink/60 hover:text-ink text-sm no-underline transition-colors'
+                className='text-ink/70 hover:text-ink text-sm no-underline transition-colors'
               >
                 ← {previous.title}
               </Link>
@@ -104,7 +104,7 @@ export default async function EssayPage({ params }: Props) {
             {next && (
               <Link
                 href={`/writing/denemeler/${next.slug}`}
-                className='text-ink/60 hover:text-ink text-sm no-underline transition-colors'
+                className='text-ink/70 hover:text-ink text-sm no-underline transition-colors'
               >
                 {next.title} →
               </Link>

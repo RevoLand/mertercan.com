@@ -43,7 +43,7 @@ export default function Writing() {
       <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(writingJsonLd) }} />
       <section className='container-base pt-14 pb-24 md:pt-20 md:pb-[150px]'>
         <h1 className='mb-3'>Writing</h1>
-        <p lang='en' className='text-ink/55 mt-0! mb-16 max-w-[620px] text-sm! italic md:mb-20'>
+        <p lang='en' className='text-ink/70 mt-0! mb-16 max-w-[620px] text-sm! italic md:mb-20'>
           Notes, essays, and small conversations I want to keep somewhere quieter than the feed.
         </p>
 
@@ -57,7 +57,7 @@ export default function Writing() {
           <div className='space-y-7 md:space-y-8'>
             {essays.map((essay) => (
               <article key={essay.slug}>
-                <p className='text-ink/30! mb-1.5 text-sm!'>
+                <p className='text-ink/70! mb-1.5 text-sm!'>
                   {essay.position}. deneme · {essay.displayDate}
                 </p>
                 <h3 className='mb-1.5'>
@@ -65,7 +65,7 @@ export default function Writing() {
                     {essay.title}
                   </Link>
                 </h3>
-                <p className='text-ink/55 mt-0! text-sm!'>{essay.description}</p>
+                <p className='text-ink/70 mt-0! text-sm!'>{essay.description}</p>
               </article>
             ))}
           </div>

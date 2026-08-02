@@ -105,15 +105,15 @@ export default function Life() {
     <main className='min-h-screen'>
       <section className='container-base pt-14 pb-24 md:pt-20 md:pb-[150px]'>
         <h1 className='mb-3'>Life</h1>
-        <p className='text-ink/50 mt-0! mb-16 text-sm! italic md:mb-20'>
+        <p className='text-ink/70 mt-0! mb-16 text-sm! italic md:mb-20'>
           A quiet record of how this site — and I — grow.
         </p>
 
         <div className='max-w-[620px] space-y-14 md:space-y-16'>
           {entries.map((entry) => (
             <div key={entry.date}>
-              <p className='text-ink/40 mb-4 text-sm! font-medium tracking-wide uppercase'>{entry.date}</p>
-              {entry.intro && <p className='text-ink/60 mb-6 italic'>{entry.intro}</p>}
+              <p className='text-ink/70 mb-4 text-sm! font-medium tracking-wide uppercase'>{entry.date}</p>
+              {entry.intro && <p className='text-ink/75 mb-6 italic'>{entry.intro}</p>}
               <ul className='space-y-2.5'>
                 {entry.notes.map((note, i) => (
                   <li key={i} className="before:text-ink/30 text-ink/80 list-none before:mr-3 before:content-['-']">
@@ -121,7 +121,7 @@ export default function Life() {
                     {note.relatedLink && (
                       <Link
                         href={note.relatedLink.href}
-                        className='text-ink/45 hover:text-ink/75 ml-2 text-sm no-underline transition-colors'
+                        className='text-ink/70 hover:text-ink/90 decoration-ink/40 ml-2 text-sm underline underline-offset-2 transition-colors'
                       >
                         {note.relatedLink.label} →
                       </Link>
