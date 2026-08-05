@@ -51,6 +51,19 @@ type LifeNote = {
 
 const entries: Entry[] = [
   {
+    date: 'August 2026',
+    intro: 'The conversation continued. This time, it turned toward responsibility.',
+    notes: [
+      {
+        text: 'Added Sorumluluk as the seventh part of the Turkish Denemeler series.',
+        relatedLink: { href: '/writing/denemeler/sorumluluk', label: 'Sorumluluk' },
+      },
+      {
+        text: 'The next conversation will be about healthy boundaries.',
+      },
+    ],
+  },
+  {
     date: 'July 2026',
     intro:
       'Writing changed shape this month. One piece became a public tool. A few essays found their place on the site, and the conversation continued.',
