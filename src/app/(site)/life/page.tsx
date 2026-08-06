@@ -52,14 +52,15 @@ type LifeNote = {
 const entries: Entry[] = [
   {
     date: 'August 2026',
-    intro: 'The conversation continued. This time, it turned toward responsibility.',
+    intro: 'The conversation kept moving. Responsibility led to a question about healthy boundaries.',
     notes: [
       {
         text: 'Added Sorumluluk as the seventh part of the Turkish Denemeler series.',
         relatedLink: { href: '/writing/denemeler/sorumluluk', label: 'Sorumluluk' },
       },
       {
-        text: 'The next conversation will be about healthy boundaries.',
+        text: 'Added Sağlıklı Sınırlar as the eighth part of the Turkish Denemeler series.',
+        relatedLink: { href: '/writing/denemeler/saglikli-sinirlar', label: 'Sağlıklı Sınırlar' },
       },
     ],
   },
