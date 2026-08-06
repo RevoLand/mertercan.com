@@ -1,6 +1,7 @@
 ---
 title: "Sağlıklı Sınırlar"
 date: "2026-08-06"
+siteAddedAt: "2026-08-06"
 displayDate: "6 Ağustos 2026"
 description: "Sağlıklı sınırlar, yakınlık, öznellik ve kendimize ayrılan yeri seçmek üzerine."
 seoDescription: "Sağlıklı sınırları yakınlık, öznellik ve kendini koruma üzerinden ele alan; başkasını kontrol etmekle kendi kararını ayıran felsefi diyalog."

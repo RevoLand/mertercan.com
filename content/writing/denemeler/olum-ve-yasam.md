@@ -1,6 +1,7 @@
 ---
 title: "Ölüm ve Yaşam"
 date: "2025-01-20"
+siteAddedAt: "2026-07-08"
 displayDate: "20 Ocak 2025"
 description: "Ölüm fikrinin insanı nasıl esirgeyebildiği; yaratmak, hizmet etmek ve kendini gerçekleştirmek üzerine."
 seoDescription: "Ölüm fikrinin pişmanlık ve kaygıyı nasıl dönüştürebileceği; yaratmak, hizmet etmek ve kendini gerçekleştirmek üzerine felsefi bir diyalog."

@@ -1,6 +1,7 @@
 ---
 title: "Dostluk 2"
 date: "2026-07-28"
+siteAddedAt: "2026-07-28"
 displayDate: "28 Temmuz 2026"
 description: "Anlaşılmak, duvarları indirmek, niyet ile etki arasındaki fark ve ilişkide bozulanı birlikte onarmak üzerine."
 seoDescription: "Dostlukta anlaşılmak, duvarları indirmek, niyet ile etkiyi ayırmak ve bozulanı birlikte onarmak üzerine bir diyalog."

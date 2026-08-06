@@ -1,6 +1,7 @@
 ---
 title: "Liderlik, Yalom ve Kendine Liderlik Etmek"
 date: "2025-12-27"
+siteAddedAt: "2026-08-06"
 displayDate: "27 Aralık 2025"
 description: "Irvin Yalom’un varoluşçu yaklaşımıyla liderliğin kesiştiği yere dair kısa bir deneme."
 seoDescription: "Irvin Yalom ve liderlik ilişkisini varoluşçu psikoterapi üzerinden ele alan konuşma metni: özgürlük, sorumluluk, anlam arayışı, ilişki ve kendine liderlik."

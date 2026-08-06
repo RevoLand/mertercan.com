@@ -1,38 +1,40 @@
 import { MetadataRoute } from 'next';
 import { projects } from '@/data/projects';
 import { siteUrl } from '@/lib/seo';
-import { writings } from '@/lib/writing/registry';
+import { getWritingLastModified, writings } from '@/lib/writing/registry';
 
 export const dynamic = 'force-static';
 
-const metadataLastModified = [
-  ...projects.map((project) => project.updatedAt),
-  ...writings.map((writing) => writing.date),
-].reduce((latest, date) => (date > latest ? date : latest));
+const staticPageLastModified = {
+  home: '2026-08-02',
+  life: '2026-08-06',
+  making: '2026-08-06',
+  writing: '2026-08-06',
+} as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: siteUrl,
-      lastModified: metadataLastModified,
+      lastModified: staticPageLastModified.home,
       changeFrequency: 'monthly',
       priority: 1.0,
     },
     {
       url: `${siteUrl}/life`,
-      lastModified: metadataLastModified,
+      lastModified: staticPageLastModified.life,
       changeFrequency: 'monthly',
       priority: 0.6,
     },
     {
       url: `${siteUrl}/making`,
-      lastModified: metadataLastModified,
+      lastModified: staticPageLastModified.making,
       changeFrequency: 'monthly',
       priority: 0.7,
     },
     {
       url: `${siteUrl}/writing`,
-      lastModified: metadataLastModified,
+      lastModified: staticPageLastModified.writing,
       changeFrequency: 'monthly',
       priority: 0.6,
     },
@@ -44,7 +46,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     ...writings.map((writing) => ({
       url: `${siteUrl}/writing/${writing.path.join('/')}`,
-      lastModified: writing.date,
+      lastModified: getWritingLastModified(writing),
       changeFrequency: 'yearly' as const,
       priority: 0.5,
     })),

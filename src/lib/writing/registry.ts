@@ -13,6 +13,8 @@ type WritingBase = {
   path: string[];
   title: string;
   date: string;
+  siteAddedAt: string;
+  updatedAt?: string;
   displayDate: string;
   description: string;
   seoDescription: string;
@@ -77,6 +79,10 @@ function requiredIsoDate(value: unknown, field: string, filePath: string): strin
   return date;
 }
 
+function optionalIsoDate(value: unknown, field: string, filePath: string): string | undefined {
+  return value === undefined ? undefined : requiredIsoDate(value, field, filePath);
+}
+
 function requiredPositiveInteger(value: unknown, field: string, filePath: string): number {
   if (!Number.isInteger(value) || (value as number) < 1) {
     throw new Error(`${filePath}: ${field} must be a positive integer.`);
@@ -129,6 +135,8 @@ function loadWriting(relativeFilePath: string): WritingEntry {
     path: publicPath,
     title: requiredString(data.title, 'title', relativeFilePath),
     date: requiredIsoDate(data.date, 'date', relativeFilePath),
+    siteAddedAt: requiredIsoDate(data.siteAddedAt, 'siteAddedAt', relativeFilePath),
+    updatedAt: optionalIsoDate(data.updatedAt, 'updatedAt', relativeFilePath),
     displayDate: requiredString(data.displayDate, 'displayDate', relativeFilePath),
     description,
     seoDescription: optionalString(data.seoDescription, description, 'seoDescription', relativeFilePath),
@@ -215,6 +223,10 @@ export function getWritingByPath(pathSegments: string[]): WritingEntry | undefin
       writing.path.length === pathSegments.length &&
       writing.path.every((segment, index) => segment === pathSegments[index])
   );
+}
+
+export function getWritingLastModified(writing: WritingEntry): string {
+  return writing.updatedAt ?? writing.siteAddedAt;
 }
 
 export function getWritingNavigation(writing: WritingEntry): {

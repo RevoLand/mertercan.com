@@ -1,6 +1,7 @@
 ---
 title: "Dostluk"
 date: "2025-01-26"
+siteAddedAt: "2026-07-08"
 displayDate: "26 Ocak 2025"
 description: "Gerçek dostluğun sadece iyi hissettirmek değil, bazen büyütmek, zorlamak ve yanında durmak olması üzerine."
 seoDescription: "Gerçek dostluğun iyilikten fazlası olduğunu; erdem, saygı, zorlamak, büyütmek ve yanında durmak üzerinden tartışan felsefi bir diyalog."

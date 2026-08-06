@@ -1,6 +1,7 @@
 ---
 title: "Düşünceler"
 date: "2025-01-18"
+siteAddedAt: "2026-07-08"
 displayDate: "18 Ocak 2025"
 description: "Bir düşüncenin nerede başladığı, neye dönüşebileceği ve eyleme geçmediğinde geride ne bıraktığı üzerine."
 seoDescription: "Düşünce, yaratım ve eylem arasındaki ilişkiyi; bir fikrin ne zaman dönüşüme, ne zaman hareketsizliğe dönüştüğünü tartışan kısa bir diyalog."
