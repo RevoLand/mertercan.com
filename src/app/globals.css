@@ -130,6 +130,31 @@ a:hover {
   @apply mt-[1.05rem];
 }
 
+.writing-prose {
+  @apply mt-14 mb-16 max-w-[680px] md:mt-16 md:mb-20;
+}
+
+.writing-prose p,
+.writing-prose li {
+  @apply text-ink/85 leading-[1.9]!;
+}
+
+.writing-prose p {
+  @apply m-0;
+}
+
+.writing-prose p + p {
+  @apply mt-[1.05rem];
+}
+
+.writing-prose h2 {
+  @apply mt-16 mb-6 text-[1.45rem]! md:mt-20 md:text-[1.75rem]!;
+}
+
+.writing-prose ul {
+  @apply my-6 list-disc space-y-2 pl-6;
+}
+
 /* Footer signature line */
 .footer-note {
   font-family: Georgia, serif;

@@ -1,5 +1,5 @@
 import type { Project } from '@/data/projects';
-import type { Essay } from '@/data/essays';
+import type { WritingEntry } from '@/lib/writing/registry';
 
 export const siteUrl = 'https://mertercan.com';
 export const websiteId = `${siteUrl}/#website`;
@@ -138,11 +138,13 @@ export function buildProjectJsonLd(project: Project): { '@context': string; '@gr
   };
 }
 
-export function getEssayUrl(essay: Essay): string {
-  return `${siteUrl}/writing/denemeler/${essay.slug}`;
+export function getWritingEntryUrl(writing: WritingEntry): string {
+  return `${siteUrl}/writing/${writing.path.join('/')}`;
 }
 
-export function buildWritingJsonLd(): { '@context': string; '@graph': JsonLdNode[] } {
+export function buildWritingJsonLd(entries: WritingEntry[]): { '@context': string; '@graph': JsonLdNode[] } {
+  const itemListId = `${siteUrl}/writing#items`;
+
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -163,17 +165,68 @@ export function buildWritingJsonLd(): { '@context': string; '@graph': JsonLdNode
         author: {
           '@id': personId,
         },
+        mainEntity: {
+          '@id': itemListId,
+        },
+      },
+      {
+        '@type': 'ItemList',
+        '@id': itemListId,
+        name: 'Writing by Mert Ercan',
+        numberOfItems: entries.length,
+        itemListElement: entries.map((writing, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: writing.title,
+          url: getWritingEntryUrl(writing),
+        })),
       },
     ],
   };
 }
 
-export function getEssaySeoDescription(essay: Essay): string {
-  return `${essay.title} is part ${essay.position} of Denemeler, a Turkish essay series by Mert Ercan.`;
+export function getWritingSeoDescription(writing: WritingEntry): string {
+  return writing.seoDescription;
 }
 
-export function buildEssayJsonLd(essay: Essay): { '@context': string; '@graph': JsonLdNode[] } {
-  const essayUrl = getEssayUrl(essay);
+function getWritingSection(writing: WritingEntry): string {
+  return writing.group === 'denemeler' ? 'Denemeler' : 'Konuşmalar';
+}
+
+export function buildWritingEntryJsonLd(writing: WritingEntry): { '@context': string; '@graph': JsonLdNode[] } {
+  const writingUrl = getWritingEntryUrl(writing);
+  const writingNode: JsonLdNode = {
+    '@type': 'Article',
+    '@id': `${writingUrl}#article`,
+    url: writingUrl,
+    name: writing.title,
+    headline: writing.title,
+    description: getWritingSeoDescription(writing),
+    inLanguage: 'tr',
+    articleSection: getWritingSection(writing),
+    datePublished: writing.date,
+    image: `${siteUrl}/opengraph-image`,
+    author: {
+      '@id': personId,
+    },
+    publisher: {
+      '@id': personId,
+    },
+    isPartOf: {
+      '@id': `${siteUrl}/writing#page`,
+    },
+    mainEntityOfPage: {
+      '@id': writingUrl,
+    },
+  };
+
+  if (writing.keywords.length > 0) {
+    writingNode.keywords = writing.keywords.join(', ');
+  }
+
+  if (writing.group === 'denemeler') {
+    writingNode.position = writing.position;
+  }
 
   return {
     '@context': 'https://schema.org',
@@ -181,21 +234,9 @@ export function buildEssayJsonLd(essay: Essay): { '@context': string; '@graph': 
       buildBreadcrumbJsonLd([
         { name: 'Home', url: siteUrl },
         { name: 'Writing', url: `${siteUrl}/writing` },
-        { name: essay.title, url: essayUrl },
+        { name: writing.title, url: writingUrl },
       ]),
-      {
-        '@type': 'CreativeWork',
-        '@id': `${essayUrl}#essay`,
-        url: essayUrl,
-        name: essay.title,
-        description: getEssaySeoDescription(essay),
-        inLanguage: 'tr',
-        position: essay.position,
-        datePublished: essay.date,
-        author: {
-          '@id': personId,
-        },
-      },
+      writingNode,
     ],
   };
 }

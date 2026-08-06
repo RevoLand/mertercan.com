@@ -1,11 +1,13 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/app/components/Footer';
-import { essays } from '@/data/essays';
 import { buildWritingJsonLd, siteName, siteUrl } from '@/lib/seo';
+import { getArticleWritings, getDialogueWritings, writings } from '@/lib/writing/registry';
 
 const description = 'Notes, essays, and small conversations I want to keep somewhere quieter than the feed.';
-const writingJsonLd = buildWritingJsonLd();
+const writingJsonLd = buildWritingJsonLd(writings);
+const essays = getDialogueWritings();
+const talks = getArticleWritings();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -50,8 +52,9 @@ export default function Writing() {
         <section className='max-w-[620px]'>
           <h2 className='mb-4 text-[1.45rem]! md:text-[1.75rem]!'>Denemeler</h2>
           <p lang='tr' className='text-ink/70 mb-12 max-w-[58ch] md:mb-14'>
-            Düşünce, ölüm, özgecilik, insan doğası ve dostluk üzerine; zamanında yazarlığa giriş eğitimleri sırasında
-            karaladığım {essays.length} küçük diyalog denemesi.
+            Bu serinin ilk beş denemesini yazarlığa giriş eğitimleri sırasında karaladım: düşünce, ölüm, özgecilik,
+            insan doğası ve dostluk. Zamanla bunlara anlaşılmak, güvenmek, sorumluluk ve sağlıklı sınırlar üzerine üç
+            yeni diyalog eklendi.
           </p>
 
           <div className='space-y-7 md:space-y-8'>
@@ -66,6 +69,26 @@ export default function Writing() {
                   </Link>
                 </h3>
                 <p className='text-ink/70 mt-0! text-sm!'>{essay.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className='mt-20 max-w-[620px] md:mt-28'>
+          <h2 className='mb-10 text-[1.45rem]! md:mb-12 md:text-[1.75rem]!'>Konuşmalar</h2>
+
+          <div className='space-y-7 md:space-y-8'>
+            {talks.map((writing) => (
+              <article key={writing.slug}>
+                <p className='text-ink/70! mb-1.5 text-sm!'>
+                  {writing.kind} · {writing.displayDate}
+                </p>
+                <h3 className='mb-1.5'>
+                  <Link href={`/writing/${writing.path.join('/')}`} className='text-ink hover:text-ink/70 no-underline'>
+                    {writing.title}
+                  </Link>
+                </h3>
+                <p className='text-ink/70 mt-0! text-sm!'>{writing.description}</p>
               </article>
             ))}
           </div>

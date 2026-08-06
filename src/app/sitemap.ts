@@ -1,13 +1,13 @@
 import { MetadataRoute } from 'next';
-import { essays } from '@/data/essays';
 import { projects } from '@/data/projects';
 import { siteUrl } from '@/lib/seo';
+import { writings } from '@/lib/writing/registry';
 
 export const dynamic = 'force-static';
 
 const metadataLastModified = [
   ...projects.map((project) => project.updatedAt),
-  ...essays.map((essay) => essay.date),
+  ...writings.map((writing) => writing.date),
 ].reduce((latest, date) => (date > latest ? date : latest));
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -42,9 +42,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly' as const,
       priority: 0.6,
     })),
-    ...essays.map((essay) => ({
-      url: `${siteUrl}/writing/denemeler/${essay.slug}`,
-      lastModified: essay.date,
+    ...writings.map((writing) => ({
+      url: `${siteUrl}/writing/${writing.path.join('/')}`,
+      lastModified: writing.date,
       changeFrequency: 'yearly' as const,
       priority: 0.5,
     })),

@@ -52,7 +52,8 @@ type LifeNote = {
 const entries: Entry[] = [
   {
     date: 'August 2026',
-    intro: 'The conversation kept moving. Responsibility led to a question about healthy boundaries.',
+    intro:
+      'Writing kept moving. A talk from last year found its place here, while responsibility led to a question about healthy boundaries.',
     notes: [
       {
         text: 'Added Sorumluluk as the seventh part of the Turkish Denemeler series.',
@@ -61,6 +62,13 @@ const entries: Entry[] = [
       {
         text: 'Added Sağlıklı Sınırlar as the eighth part of the Turkish Denemeler series.',
         relatedLink: { href: '/writing/denemeler/saglikli-sinirlar', label: 'Sağlıklı Sınırlar' },
+      },
+      {
+        text: "Added the leadership talk I presented on stage at the end of 2025, connecting Irvin Yalom's existential approach with leading oneself.",
+        relatedLink: {
+          href: '/writing/liderlik-yalom-ve-kendine-liderlik-etmek',
+          label: 'Liderlik, Yalom ve Kendine Liderlik Etmek',
+        },
       },
     ],
   },
