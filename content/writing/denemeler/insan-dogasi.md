@@ -3,6 +3,7 @@ title: "İnsan Doğası"
 date: "2025-01-23"
 displayDate: "23 Ocak 2025"
 description: "Ikigai, fark edilmek, almayı öğrenmek ve insanı iyileştiren ilişkinin ne olduğu üzerine."
+seoDescription: "İnsan doğasını ikigai, fark edilme, sevgi, yardım istemek ve iyileştirici ilişkiler üzerinden düşünen kısa bir felsefi diyalog."
 group: "denemeler"
 format: "dialogue"
 position: 4

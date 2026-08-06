@@ -138,11 +138,60 @@ export function buildProjectJsonLd(project: Project): { '@context': string; '@gr
   };
 }
 
+export function buildMakingJsonLd(
+  projects: Project[],
+  description: string
+): { '@context': string; '@graph': JsonLdNode[] } {
+  const itemListId = `${siteUrl}/making#items`;
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      buildBreadcrumbJsonLd([
+        { name: 'Home', url: siteUrl },
+        { name: 'Making', url: `${siteUrl}/making` },
+      ]),
+      {
+        '@type': 'CollectionPage',
+        '@id': `${siteUrl}/making#page`,
+        url: `${siteUrl}/making`,
+        name: 'Making',
+        description,
+        inLanguage: 'en',
+        isPartOf: {
+          '@id': websiteId,
+        },
+        author: {
+          '@id': personId,
+        },
+        mainEntity: {
+          '@id': itemListId,
+        },
+      },
+      {
+        '@type': 'ItemList',
+        '@id': itemListId,
+        name: 'Making by Mert Ercan',
+        numberOfItems: projects.length,
+        itemListElement: projects.map((project, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: project.title,
+          url: getProjectUrl(project),
+        })),
+      },
+    ],
+  };
+}
+
 export function getWritingEntryUrl(writing: WritingEntry): string {
   return `${siteUrl}/writing/${writing.path.join('/')}`;
 }
 
-export function buildWritingJsonLd(entries: WritingEntry[]): { '@context': string; '@graph': JsonLdNode[] } {
+export function buildWritingJsonLd(
+  entries: WritingEntry[],
+  description: string
+): { '@context': string; '@graph': JsonLdNode[] } {
   const itemListId = `${siteUrl}/writing#items`;
 
   return {
@@ -157,8 +206,8 @@ export function buildWritingJsonLd(entries: WritingEntry[]): { '@context': strin
         '@id': `${siteUrl}/writing#page`,
         url: `${siteUrl}/writing`,
         name: 'Writing',
-        description: 'Notes, essays, and small conversations by Mert Ercan, kept somewhere quieter than the feed.',
-        inLanguage: 'en',
+        description,
+        inLanguage: ['en', 'tr'],
         isPartOf: {
           '@id': websiteId,
         },

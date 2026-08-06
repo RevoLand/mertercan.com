@@ -3,6 +3,7 @@ title: "Özgecilik"
 date: "2025-01-22"
 displayDate: "22 Ocak 2025"
 description: "Vermek, kullanılmak, ego, saf özgecilik ihtimali ve insanın kendi doğasına dönmesi üzerine."
+seoDescription: "Özgecilik, yardım etmek ve kullanılmak arasındaki gerilimi; ego, karşılık ve saf özgecilik ihtimalini tartışan felsefi bir diyalog."
 group: "denemeler"
 format: "dialogue"
 position: 3

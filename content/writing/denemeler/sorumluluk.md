@@ -3,6 +3,7 @@ title: "Sorumluluk"
 date: "2026-08-05"
 displayDate: "5 Ağustos 2026"
 description: "Açılmak, güvenmek, yaralanmak, sorumlulukları ayırmak ve sağlıklı sınırlar kurmak üzerine."
+seoDescription: "İlişkilerde açılmak, güvenmek ve yaralanmak üzerinden sorumluluğun sınırlarını; anlaşılabilir olmayı ve güvenme cesaretini tartışan diyalog."
 group: "denemeler"
 format: "dialogue"
 position: 7

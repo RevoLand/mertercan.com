@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/app/components/Footer';
 import { buildWritingJsonLd, siteName, siteUrl } from '@/lib/seo';
-import { getArticleWritings, getDialogueWritings, writings } from '@/lib/writing/registry';
+import { getArticleWritings, getDialogueWritings } from '@/lib/writing/registry';
 
 const description = 'Notes, essays, and small conversations I want to keep somewhere quieter than the feed.';
-const writingJsonLd = buildWritingJsonLd(writings);
 const essays = getDialogueWritings();
 const talks = getArticleWritings();
+const writingJsonLd = buildWritingJsonLd([...essays, ...talks], description);
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -49,7 +49,7 @@ export default function Writing() {
           Notes, essays, and small conversations I want to keep somewhere quieter than the feed.
         </p>
 
-        <section className='max-w-[620px]'>
+        <section className='max-w-[620px]' lang='tr'>
           <h2 className='mb-4 text-[1.45rem]! md:text-[1.75rem]!'>Denemeler</h2>
           <p lang='tr' className='text-ink/70 mb-12 max-w-[58ch] md:mb-14'>
             Bu serinin ilk beş denemesini yazarlığa giriş eğitimleri sırasında karaladım: düşünce, ölüm, özgecilik,
@@ -74,7 +74,7 @@ export default function Writing() {
           </div>
         </section>
 
-        <section className='mt-20 max-w-[620px] md:mt-28'>
+        <section className='mt-20 max-w-[620px] md:mt-28' lang='tr'>
           <h2 className='mb-10 text-[1.45rem]! md:mb-12 md:text-[1.75rem]!'>Konuşmalar</h2>
 
           <div className='space-y-7 md:space-y-8'>

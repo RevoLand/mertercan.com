@@ -2,16 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/app/components/Footer';
 import { projects } from '@/data/projects';
-import { buildBreadcrumbJsonLd, siteName, siteUrl } from '@/lib/seo';
+import { buildMakingJsonLd, siteName, siteUrl } from '@/lib/seo';
 
 const description = 'Things I have made — small and larger, tools and products, quiet and continuing.';
-const breadcrumbJsonLd = {
-  '@context': 'https://schema.org',
-  ...buildBreadcrumbJsonLd([
-    { name: 'Home', url: siteUrl },
-    { name: 'Making', url: `${siteUrl}/making` },
-  ]),
-};
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -45,11 +38,12 @@ export const metadata: Metadata = {
 
 const largerProjects = projects.filter((p) => p.group === 'larger');
 const smallProjects = projects.filter((p) => p.group === 'small');
+const makingJsonLd = buildMakingJsonLd([...largerProjects, ...smallProjects], description);
 
 export default function Making() {
   return (
     <main className='min-h-screen'>
-      <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
+      <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(makingJsonLd) }} />
       <section className='container-base pt-14 pb-24 md:pt-20 md:pb-[150px]'>
         <h1 className='mb-3'>Making</h1>
         <p className='text-ink/70 mt-0! mb-16 text-sm! italic md:mb-20'>
@@ -59,7 +53,7 @@ export default function Making() {
         <div className='max-w-[620px] space-y-14 md:space-y-16'>
           {/* Larger things */}
           <div>
-            <div className='text-ink/70 mb-8 text-sm font-medium tracking-wide uppercase'>larger things</div>
+            <h2 className='text-ink/70 mt-0! mb-8! text-sm! font-medium tracking-wide uppercase'>larger things</h2>
             <div className='space-y-8 md:space-y-10'>
               {largerProjects.map((project) => (
                 <div key={project.slug}>
@@ -80,7 +74,7 @@ export default function Making() {
 
           {/* Small tools */}
           <div>
-            <div className='text-ink/70 mb-8 text-sm font-medium tracking-wide uppercase'>small tools</div>
+            <h2 className='text-ink/70 mt-0! mb-8! text-sm! font-medium tracking-wide uppercase'>small tools</h2>
             <div className='space-y-6'>
               {smallProjects.map((project) => (
                 <div key={project.slug}>
