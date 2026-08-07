@@ -53,8 +53,8 @@ export default function Writing() {
           <h2 className='mb-4 text-[1.45rem]! md:text-[1.75rem]!'>Denemeler</h2>
           <p lang='tr' className='text-ink/70 mb-12 max-w-[58ch] md:mb-14'>
             Bu serinin ilk beş denemesini yazarlığa giriş eğitimleri sırasında karaladım: düşünce, ölüm, özgecilik,
-            insan doğası ve dostluk. Zamanla bunlara anlaşılmak, güvenmek, sorumluluk ve sağlıklı sınırlar üzerine üç
-            yeni diyalog eklendi.
+            insan doğası ve dostluk. Zamanla bunlara anlaşılmak, güvenmek, sorumluluk, sağlıklı sınırlar ve öznellik
+            üzerine dört yeni diyalog eklendi.
           </p>
 
           <div className='space-y-7 md:space-y-8'>

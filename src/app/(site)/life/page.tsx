@@ -53,7 +53,7 @@ const entries: Entry[] = [
   {
     date: 'August 2026',
     intro:
-      'Writing kept moving. A talk from last year found its place here, while responsibility led to a question about healthy boundaries.',
+      'Writing kept moving. A talk from last year found its place here, while responsibility led to questions about healthy boundaries and subjectivity.',
     notes: [
       {
         text: 'Added Sorumluluk as the seventh part of the Turkish Denemeler series.',
@@ -62,6 +62,10 @@ const entries: Entry[] = [
       {
         text: 'Added Sağlıklı Sınırlar as the eighth part of the Turkish Denemeler series.',
         relatedLink: { href: '/writing/denemeler/saglikli-sinirlar', label: 'Sağlıklı Sınırlar' },
+      },
+      {
+        text: 'Added Öznellik as the ninth and final part of the Turkish Denemeler series.',
+        relatedLink: { href: '/writing/denemeler/oznellik', label: 'Öznellik' },
       },
       {
         text: "Added the leadership talk I presented on stage at the end of 2025, connecting Irvin Yalom's existential approach with leading oneself.",
