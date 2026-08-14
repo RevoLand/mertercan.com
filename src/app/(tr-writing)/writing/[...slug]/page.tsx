@@ -98,31 +98,30 @@ export default async function WritingEntryPage({ params }: Props) {
         />
 
         {writing.group === 'denemeler' && (
-          <nav
-            data-nosnippet=''
-            className='border-ink/8 flex max-w-[680px] flex-col gap-5 border-t pt-8 md:flex-row md:items-start md:justify-between'
-          >
-            <div>
-              {navigation.previous && (
-                <Link
-                  href={`/writing/${navigation.previous.path.join('/')}`}
-                  className='text-ink/70 hover:text-ink text-sm no-underline transition-colors'
-                >
-                  ← {navigation.previous.title}
-                </Link>
-              )}
-            </div>
-            <div className='md:text-right'>
-              {navigation.next && (
-                <Link
-                  href={`/writing/${navigation.next.path.join('/')}`}
-                  className='text-ink/70 hover:text-ink text-sm no-underline transition-colors'
-                >
-                  {navigation.next.title} →
-                </Link>
-              )}
-            </div>
-          </nav>
+          <div data-nosnippet=''>
+            <nav className='border-ink/8 flex max-w-[680px] flex-col gap-5 border-t pt-8 md:flex-row md:items-start md:justify-between'>
+              <div>
+                {navigation.previous && (
+                  <Link
+                    href={`/writing/${navigation.previous.path.join('/')}`}
+                    className='text-ink/70 hover:text-ink text-sm no-underline transition-colors'
+                  >
+                    ← {navigation.previous.title}
+                  </Link>
+                )}
+              </div>
+              <div className='md:text-right'>
+                {navigation.next && (
+                  <Link
+                    href={`/writing/${navigation.next.path.join('/')}`}
+                    className='text-ink/70 hover:text-ink text-sm no-underline transition-colors'
+                  >
+                    {navigation.next.title} →
+                  </Link>
+                )}
+              </div>
+            </nav>
+          </div>
         )}
       </article>
 

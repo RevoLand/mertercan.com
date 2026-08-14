@@ -22,33 +22,35 @@ export default function SiteNav() {
   const pathname = usePathname();
 
   return (
-    <nav data-nosnippet='' className='siteHeader container-base' aria-label='Site' lang='en'>
-      <Link
-        href='/'
-        className={clsx('siteHeaderLink', pathname === '/' && 'is-current')}
-        aria-current={getAriaCurrent(pathname === '/')}
-        translate='no'
-      >
-        mert ercan
-      </Link>
-      <div className='siteNav'>
-        {navItems.map((item) => {
-          const isCurrent = pathname === item.href || pathname.startsWith(`${item.href}/`);
+    <div data-nosnippet=''>
+      <nav className='siteHeader container-base' aria-label='Site' lang='en'>
+        <Link
+          href='/'
+          className={clsx('siteHeaderLink', pathname === '/' && 'is-current')}
+          aria-current={getAriaCurrent(pathname === '/')}
+          translate='no'
+        >
+          mert ercan
+        </Link>
+        <div className='siteNav'>
+          {navItems.map((item) => {
+            const isCurrent = pathname === item.href || pathname.startsWith(`${item.href}/`);
 
-          return (
-            <div key={item.href} className='flex items-center gap-2.5 sm:gap-4'>
-              <Link
-                href={item.href}
-                className={clsx('siteHeaderLink', isCurrent && 'is-current')}
-                aria-current={getAriaCurrent(isCurrent)}
-              >
-                {item.label}
-              </Link>
-              {item.label !== 'life' && <span aria-hidden='true'>·</span>}
-            </div>
-          );
-        })}
-      </div>
-    </nav>
+            return (
+              <div key={item.href} className='flex items-center gap-2.5 sm:gap-4'>
+                <Link
+                  href={item.href}
+                  className={clsx('siteHeaderLink', isCurrent && 'is-current')}
+                  aria-current={getAriaCurrent(isCurrent)}
+                >
+                  {item.label}
+                </Link>
+                {item.label !== 'life' && <span aria-hidden='true'>·</span>}
+              </div>
+            );
+          })}
+        </div>
+      </nav>
+    </div>
   );
 }
