@@ -22,7 +22,7 @@ export default function SiteNav() {
   const pathname = usePathname();
 
   return (
-    <nav className='siteHeader container-base' aria-label='Site' lang='en'>
+    <nav data-nosnippet='' className='siteHeader container-base' aria-label='Site' lang='en'>
       <Link
         href='/'
         className={clsx('siteHeaderLink', pathname === '/' && 'is-current')}

@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className='container-base space-y-8 py-14 text-center md:py-[60px]'>
+    <footer data-nosnippet='' className='container-base space-y-8 py-14 text-center md:py-[60px]'>
       <p className='text-ink/70'>
         you can always reach me at → <a href='mailto:me@mertercan.com'>me@mertercan.com</a>
       </p>
