@@ -7,9 +7,9 @@ export const dynamic = 'force-static';
 
 const staticPageLastModified = {
   home: '2026-08-02',
-  life: '2026-08-06',
+  life: '2026-08-14',
   making: '2026-08-06',
-  writing: '2026-08-06',
+  writing: '2026-08-14',
 } as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {

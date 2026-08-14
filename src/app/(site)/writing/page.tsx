@@ -2,12 +2,13 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/app/components/Footer';
 import { buildWritingJsonLd, siteName, siteUrl } from '@/lib/seo';
-import { getArticleWritings, getDialogueWritings } from '@/lib/writing/registry';
+import { getArticleWritings, getDialogueWritings, getPoemWritings } from '@/lib/writing/registry';
 
-const description = 'Notes, essays, and small conversations I want to keep somewhere quieter than the feed.';
+const description = 'Notes, poems, essays, and small conversations I want to keep somewhere quieter than the feed.';
 const essays = getDialogueWritings();
+const poems = getPoemWritings();
 const talks = getArticleWritings();
-const writingJsonLd = buildWritingJsonLd([...essays, ...talks], description);
+const writingJsonLd = buildWritingJsonLd([...essays, ...poems, ...talks], description);
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -46,7 +47,7 @@ export default function Writing() {
       <section className='container-base pt-14 pb-24 md:pt-20 md:pb-[150px]'>
         <h1 className='mb-3'>Writing</h1>
         <p lang='en' className='text-ink/70 mt-0! mb-16 max-w-[620px] text-sm! italic md:mb-20'>
-          Notes, essays, and small conversations I want to keep somewhere quieter than the feed.
+          Notes, poems, essays, and small conversations I want to keep somewhere quieter than the feed.
         </p>
 
         <section className='max-w-[620px]' lang='tr'>
@@ -69,6 +70,26 @@ export default function Writing() {
                   </Link>
                 </h3>
                 <p className='text-ink/70 mt-0! text-sm!'>{essay.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className='mt-20 max-w-[620px] md:mt-28' lang='tr'>
+          <h2 className='mb-10 text-[1.45rem]! md:mb-12 md:text-[1.75rem]!'>Şiirler</h2>
+
+          <div className='space-y-7 md:space-y-8'>
+            {poems.map((poem) => (
+              <article key={poem.slug}>
+                <p className='text-ink/70! mb-1.5 text-sm!'>
+                  {poem.kind} · {poem.displayDate}
+                </p>
+                <h3 className='mb-1.5'>
+                  <Link href={`/writing/${poem.path.join('/')}`} className='text-ink hover:text-ink/70 no-underline'>
+                    {poem.title}
+                  </Link>
+                </h3>
+                <p className='text-ink/70 mt-0! text-sm!'>{poem.description}</p>
               </article>
             ))}
           </div>

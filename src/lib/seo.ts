@@ -239,20 +239,28 @@ export function getWritingSeoDescription(writing: WritingEntry): string {
 }
 
 function getWritingSection(writing: WritingEntry): string {
-  return writing.group === 'denemeler' ? 'Denemeler' : 'Konuşmalar';
+  if (writing.group === 'denemeler') {
+    return 'Denemeler';
+  }
+
+  if (writing.group === 'siirler') {
+    return 'Şiirler';
+  }
+
+  return 'Konuşmalar';
 }
 
 export function buildWritingEntryJsonLd(writing: WritingEntry): { '@context': string; '@graph': JsonLdNode[] } {
   const writingUrl = getWritingEntryUrl(writing);
+  const writingNodeId = writing.format === 'poem' ? `${writingUrl}#creative-work` : `${writingUrl}#article`;
   const writingNode: JsonLdNode = {
-    '@type': 'Article',
-    '@id': `${writingUrl}#article`,
+    '@type': writing.format === 'poem' ? 'CreativeWork' : 'Article',
+    '@id': writingNodeId,
     url: writingUrl,
     name: writing.title,
     headline: writing.title,
     description: getWritingSeoDescription(writing),
     inLanguage: 'tr',
-    articleSection: getWritingSection(writing),
     datePublished: writing.date,
     image: `${siteUrl}/opengraph-image`,
     author: {
@@ -268,6 +276,12 @@ export function buildWritingEntryJsonLd(writing: WritingEntry): { '@context': st
       '@id': writingUrl,
     },
   };
+
+  if (writing.format === 'poem') {
+    writingNode.genre = 'Poetry';
+  } else {
+    writingNode.articleSection = getWritingSection(writing);
+  }
 
   if (writing.keywords.length > 0) {
     writingNode.keywords = writing.keywords.join(', ');

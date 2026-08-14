@@ -56,6 +56,10 @@ const entries: Entry[] = [
       'Writing kept moving. A talk from last year found its place here, while responsibility led to questions about healthy boundaries and subjectivity.',
     notes: [
       {
+        text: 'Tedbir became the first poem published on the site.',
+        relatedLink: { href: '/writing/siirler/tedbir', label: 'Tedbir' },
+      },
+      {
         text: 'Added Sorumluluk as the seventh part of the Turkish Denemeler series.',
         relatedLink: { href: '/writing/denemeler/sorumluluk', label: 'Sorumluluk' },
       },

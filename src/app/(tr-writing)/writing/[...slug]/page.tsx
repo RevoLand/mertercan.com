@@ -9,6 +9,12 @@ type Props = {
   params: Promise<{ slug: string[] }>;
 };
 
+const writingBodyClassNames = {
+  dialogue: 'essay-dialogue',
+  poem: 'writing-poem',
+  article: 'writing-prose',
+} as const;
+
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -89,7 +95,7 @@ export default async function WritingEntryPage({ params }: Props) {
         )}
 
         <div
-          className={writing.format === 'dialogue' ? 'essay-dialogue' : 'writing-prose'}
+          className={writingBodyClassNames[writing.format]}
           dangerouslySetInnerHTML={{ __html: writing.contentHtml }}
         />
 

@@ -130,6 +130,18 @@ a:hover {
   @apply mt-[1.05rem];
 }
 
+.writing-poem {
+  @apply mt-14 mb-16 max-w-[620px] md:mt-16 md:mb-20;
+}
+
+.writing-poem p {
+  @apply text-ink/85 m-0 whitespace-pre-line leading-[1.9]!;
+}
+
+.writing-poem p + p {
+  @apply mt-6;
+}
+
 .writing-prose {
   @apply mt-14 mb-16 max-w-[680px] md:mt-16 md:mb-20;
 }

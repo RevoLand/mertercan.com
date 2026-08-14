@@ -6,7 +6,7 @@ import { siteDescription, siteName, siteTitle, siteUrl } from '@/lib/seo';
 import '../globals.css';
 
 // eslint-disable-next-line new-cap
-export const poppins = Poppins({
+const poppins = Poppins({
   subsets: ['latin', 'latin-ext'],
   weight: ['400', '500', '600'],
   style: ['normal', 'italic'],

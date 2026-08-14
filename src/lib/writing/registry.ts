@@ -5,8 +5,8 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
-export type WritingGroup = 'denemeler' | 'konusmalar';
-export type WritingFormat = 'dialogue' | 'article';
+export type WritingGroup = 'denemeler' | 'siirler' | 'konusmalar';
+export type WritingFormat = 'dialogue' | 'poem' | 'article';
 
 type WritingBase = {
   slug: string;
@@ -34,7 +34,12 @@ export type ArticleWriting = WritingBase & {
   format: 'article';
 };
 
-export type WritingEntry = DialogueWriting | ArticleWriting;
+export type PoemWriting = WritingBase & {
+  group: 'siirler';
+  format: 'poem';
+};
+
+export type WritingEntry = DialogueWriting | PoemWriting | ArticleWriting;
 
 const contentDirectory = path.join(process.cwd(), 'content/writing');
 const markdownProcessor = remark().use(html);
@@ -96,16 +101,16 @@ function containsRawHtml(node: MarkdownNode): boolean {
 }
 
 function parseGroup(value: unknown, filePath: string): WritingGroup {
-  if (value !== 'denemeler' && value !== 'konusmalar') {
-    throw new Error(`${filePath}: group must be denemeler or konusmalar.`);
+  if (value !== 'denemeler' && value !== 'siirler' && value !== 'konusmalar') {
+    throw new Error(`${filePath}: group must be denemeler, siirler, or konusmalar.`);
   }
 
   return value;
 }
 
 function parseFormat(value: unknown, filePath: string): WritingFormat {
-  if (value !== 'dialogue' && value !== 'article') {
-    throw new Error(`${filePath}: format must be dialogue or article.`);
+  if (value !== 'dialogue' && value !== 'poem' && value !== 'article') {
+    throw new Error(`${filePath}: format must be dialogue, poem, or article.`);
   }
 
   return value;
@@ -157,6 +162,19 @@ function loadWriting(relativeFilePath: string): WritingEntry {
       format,
       kind: `${position}. deneme`,
       position,
+    };
+  }
+
+  if (group === 'siirler') {
+    if (format !== 'poem' || publicPath.length !== 2 || publicPath[0] !== 'siirler') {
+      throw new Error(`${relativeFilePath}: siirler require a siirler/slug path and poem format.`);
+    }
+
+    return {
+      ...common,
+      group,
+      format,
+      kind: 'Şiir',
     };
   }
 
@@ -214,6 +232,12 @@ export function getDialogueWritings(): DialogueWriting[] {
 export function getArticleWritings(): ArticleWriting[] {
   return writings
     .filter((writing): writing is ArticleWriting => writing.group === 'konusmalar')
+    .sort((first, second) => second.date.localeCompare(first.date));
+}
+
+export function getPoemWritings(): PoemWriting[] {
+  return writings
+    .filter((writing): writing is PoemWriting => writing.group === 'siirler')
     .sort((first, second) => second.date.localeCompare(first.date));
 }
 
