@@ -13,6 +13,7 @@ const writingBodyClassNames = {
   dialogue: 'essay-dialogue',
   poem: 'writing-poem',
   article: 'writing-prose',
+  story: 'writing-prose',
 } as const;
 
 export const dynamicParams = false;
@@ -97,7 +98,7 @@ export default async function WritingEntryPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: writing.contentHtml }}
         />
 
-        {writing.group === 'denemeler' && (
+        {(writing.group === 'denemeler' || writing.group === 'hikayeler') && (
           <div data-nosnippet=''>
             <nav className='border-ink/8 flex max-w-[680px] flex-col gap-5 border-t pt-8 md:flex-row md:items-start md:justify-between'>
               <div>

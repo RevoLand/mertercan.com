@@ -5,8 +5,8 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
-export type WritingGroup = 'denemeler' | 'siirler' | 'konusmalar';
-export type WritingFormat = 'dialogue' | 'poem' | 'article';
+export type WritingGroup = 'denemeler' | 'siirler' | 'konusmalar' | 'hikayeler';
+export type WritingFormat = 'dialogue' | 'poem' | 'article' | 'story';
 
 type WritingBase = {
   slug: string;
@@ -34,12 +34,18 @@ export type ArticleWriting = WritingBase & {
   format: 'article';
 };
 
+export type StoryWriting = WritingBase & {
+  group: 'hikayeler';
+  format: 'story';
+  position: number;
+};
+
 export type PoemWriting = WritingBase & {
   group: 'siirler';
   format: 'poem';
 };
 
-export type WritingEntry = DialogueWriting | PoemWriting | ArticleWriting;
+export type WritingEntry = DialogueWriting | PoemWriting | ArticleWriting | StoryWriting;
 
 const contentDirectory = path.join(process.cwd(), 'content/writing');
 const markdownProcessor = remark().use(html);
@@ -101,16 +107,16 @@ function containsRawHtml(node: MarkdownNode): boolean {
 }
 
 function parseGroup(value: unknown, filePath: string): WritingGroup {
-  if (value !== 'denemeler' && value !== 'siirler' && value !== 'konusmalar') {
-    throw new Error(`${filePath}: group must be denemeler, siirler, or konusmalar.`);
+  if (value !== 'denemeler' && value !== 'siirler' && value !== 'konusmalar' && value !== 'hikayeler') {
+    throw new Error(`${filePath}: group must be denemeler, siirler, konusmalar, or hikayeler.`);
   }
 
   return value;
 }
 
 function parseFormat(value: unknown, filePath: string): WritingFormat {
-  if (value !== 'dialogue' && value !== 'poem' && value !== 'article') {
-    throw new Error(`${filePath}: format must be dialogue, poem, or article.`);
+  if (value !== 'dialogue' && value !== 'poem' && value !== 'article' && value !== 'story') {
+    throw new Error(`${filePath}: format must be dialogue, poem, article, or story.`);
   }
 
   return value;
@@ -161,6 +167,22 @@ function loadWriting(relativeFilePath: string): WritingEntry {
       group,
       format,
       kind: `${position}. deneme`,
+      position,
+    };
+  }
+
+  if (group === 'hikayeler') {
+    if (format !== 'story' || publicPath.length !== 2 || publicPath[0] !== 'hikayeler') {
+      throw new Error(`${relativeFilePath}: hikayeler require a hikayeler/slug path and story format.`);
+    }
+
+    const position = requiredPositiveInteger(data.position, 'position', relativeFilePath);
+
+    return {
+      ...common,
+      group,
+      format,
+      kind: `${position}. hikâye`,
       position,
     };
   }
@@ -218,6 +240,17 @@ function loadWritings(): WritingEntry[] {
     }
   });
 
+  const storyPositions = entries
+    .filter((entry): entry is StoryWriting => entry.group === 'hikayeler')
+    .map((entry) => entry.position)
+    .sort((first, second) => first - second);
+
+  storyPositions.forEach((position, index) => {
+    if (position !== index + 1) {
+      throw new Error('Hikayeler positions must form a contiguous sequence starting at 1.');
+    }
+  });
+
   return entries;
 }
 
@@ -233,6 +266,12 @@ export function getArticleWritings(): ArticleWriting[] {
   return writings
     .filter((writing): writing is ArticleWriting => writing.group === 'konusmalar')
     .sort((first, second) => second.date.localeCompare(first.date));
+}
+
+export function getStoryWritings(): StoryWriting[] {
+  return writings
+    .filter((writing): writing is StoryWriting => writing.group === 'hikayeler')
+    .sort((first, second) => first.position - second.position);
 }
 
 export function getPoemWritings(): PoemWriting[] {
@@ -257,19 +296,19 @@ export function getWritingNavigation(writing: WritingEntry): {
   previous?: WritingEntry;
   next?: WritingEntry;
 } {
-  if (writing.group !== 'denemeler') {
+  if (writing.group !== 'denemeler' && writing.group !== 'hikayeler') {
     return {};
   }
 
-  const dialogueWritings = getDialogueWritings();
-  const index = dialogueWritings.findIndex((entry) => entry.path.join('/') === writing.path.join('/'));
+  const sequence = writing.group === 'denemeler' ? getDialogueWritings() : getStoryWritings();
+  const index = sequence.findIndex((entry) => entry.path.join('/') === writing.path.join('/'));
 
   if (index === -1) {
     return {};
   }
 
   return {
-    previous: dialogueWritings[index - 1],
-    next: dialogueWritings[index + 1],
+    previous: sequence[index - 1],
+    next: sequence[index + 1],
   };
 }

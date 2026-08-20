@@ -247,6 +247,10 @@ function getWritingSection(writing: WritingEntry): string {
     return 'Şiirler';
   }
 
+  if (writing.group === 'hikayeler') {
+    return 'Hikâyeler';
+  }
+
   return 'Konuşmalar';
 }
 
@@ -287,7 +291,7 @@ export function buildWritingEntryJsonLd(writing: WritingEntry): { '@context': st
     writingNode.keywords = writing.keywords.join(', ');
   }
 
-  if (writing.group === 'denemeler') {
+  if (writing.group === 'denemeler' || writing.group === 'hikayeler') {
     writingNode.position = writing.position;
   }
 
