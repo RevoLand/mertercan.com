@@ -118,6 +118,13 @@ a:hover {
   @apply border-t border-ink/5;
 }
 
+section[id]:target > h2 {
+  text-decoration-line: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
 .essay-dialogue {
   @apply mt-14 mb-16 max-w-[680px] md:mt-16 md:mb-20;
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/app/components/Footer';
+import WritingSectionNav from '@/app/components/WritingSectionNav';
 import { buildWritingJsonLd, siteName, siteUrl } from '@/lib/seo';
 import { getArticleWritings, getDialogueWritings, getPoemWritings, getStoryWritings } from '@/lib/writing/registry';
 
@@ -46,14 +47,18 @@ export default function Writing() {
   return (
     <main className='min-h-screen'>
       <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(writingJsonLd) }} />
-      <section className='container-base pt-14 pb-24 md:pt-20 md:pb-[150px]'>
+      <section className='writing-content container-base pt-14 pb-24 md:pt-20 md:pb-[150px]'>
         <h1 className='mb-3'>Writing</h1>
-        <p lang='en' className='text-ink/70 mt-0! mb-16 max-w-[620px] text-sm! italic md:mb-20'>
+        <p lang='en' className='text-ink/70 mt-0! mb-8 max-w-[620px] text-sm! italic md:mb-10'>
           Notes, poems, essays, stories, and small conversations I want to keep somewhere quieter than the feed.
         </p>
 
-        <section className='max-w-[620px]' lang='tr'>
-          <h2 className='mb-4 text-[1.45rem]! md:text-[1.75rem]!'>Denemeler</h2>
+        <WritingSectionNav />
+
+        <section id='denemeler' aria-labelledby='denemeler-heading' className='max-w-[620px] scroll-mt-8' lang='tr'>
+          <h2 id='denemeler-heading' className='mb-4 text-[1.45rem]! md:text-[1.75rem]!'>
+            Denemeler
+          </h2>
           <p lang='tr' className='text-ink/70 mb-12 max-w-[58ch] md:mb-14'>
             Bu serinin ilk beş denemesini yazarlığa giriş eğitimleri sırasında karaladım: düşünce, ölüm, özgecilik,
             insan doğası ve dostluk. Zamanla bunlara anlaşılmak, güvenmek, sorumluluk, sağlıklı sınırlar ve öznellik
@@ -77,8 +82,15 @@ export default function Writing() {
           </div>
         </section>
 
-        <section className='mt-20 max-w-[620px] md:mt-28' lang='tr'>
-          <h2 className='mb-4 text-[1.45rem]! md:text-[1.75rem]!'>Arena</h2>
+        <section
+          id='arena'
+          aria-labelledby='arena-heading'
+          className='mt-20 max-w-[620px] scroll-mt-8 md:mt-28'
+          lang='tr'
+        >
+          <h2 id='arena-heading' className='mb-4 text-[1.45rem]! md:text-[1.75rem]!'>
+            Arena
+          </h2>
           <p className='text-ink/70 mb-10 max-w-[58ch]'>Birbirini yıllar sonra bulan kısa hikâyeler.</p>
 
           <div className='space-y-7 md:space-y-8'>
@@ -96,8 +108,15 @@ export default function Writing() {
           </div>
         </section>
 
-        <section className='mt-20 max-w-[620px] md:mt-28' lang='tr'>
-          <h2 className='mb-10 text-[1.45rem]! md:mb-12 md:text-[1.75rem]!'>Şiirler</h2>
+        <section
+          id='siirler'
+          aria-labelledby='siirler-heading'
+          className='mt-20 max-w-[620px] scroll-mt-8 md:mt-28'
+          lang='tr'
+        >
+          <h2 id='siirler-heading' className='mb-10 text-[1.45rem]! md:mb-12 md:text-[1.75rem]!'>
+            Şiirler
+          </h2>
 
           <div className='space-y-7 md:space-y-8'>
             {poems.map((poem) => (
@@ -116,8 +135,15 @@ export default function Writing() {
           </div>
         </section>
 
-        <section className='mt-20 max-w-[620px] md:mt-28' lang='tr'>
-          <h2 className='mb-10 text-[1.45rem]! md:mb-12 md:text-[1.75rem]!'>Konuşmalar</h2>
+        <section
+          id='konusmalar'
+          aria-labelledby='konusmalar-heading'
+          className='mt-20 max-w-[620px] scroll-mt-8 md:mt-28'
+          lang='tr'
+        >
+          <h2 id='konusmalar-heading' className='mb-10 text-[1.45rem]! md:mb-12 md:text-[1.75rem]!'>
+            Konuşmalar
+          </h2>
 
           <div className='space-y-7 md:space-y-8'>
             {talks.map((writing) => (

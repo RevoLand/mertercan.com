@@ -73,7 +73,7 @@ const entries: Entry[] = [
       },
       {
         text: 'Arena began with two short stories written years apart.',
-        relatedLink: { href: '/writing', label: 'Arena' },
+        relatedLink: { href: '/writing#arena', label: 'Arena' },
       },
       {
         text: "Added the leadership talk I presented on stage at the end of 2025, connecting Irvin Yalom's existential approach with leading oneself.",
