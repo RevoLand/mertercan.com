@@ -7,7 +7,7 @@ export const dynamic = 'force-static';
 
 const staticPageLastModified = {
   home: '2026-08-02',
-  life: '2026-08-14',
+  life: '2026-08-20',
   making: '2026-08-06',
   writing: '2026-08-14',
 } as const;
