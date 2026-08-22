@@ -238,6 +238,17 @@ export function getWritingSeoDescription(writing: WritingEntry): string {
   return writing.seoDescription;
 }
 
+const writingMetadataTypeByGroup: Record<WritingEntry['group'], string> = {
+  denemeler: 'Deneme',
+  hikayeler: 'Hikâye',
+  konusmalar: 'Konuşma',
+  siirler: 'Şiir',
+};
+
+export function getWritingMetadataTitle(writing: Pick<WritingEntry, 'group' | 'title'>): string {
+  return `${writing.title} · ${writingMetadataTypeByGroup[writing.group]}`;
+}
+
 function getWritingSection(writing: WritingEntry): string {
   if (writing.group === 'denemeler') {
     return 'Denemeler';

@@ -2,7 +2,14 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/app/components/Footer';
-import { buildWritingEntryJsonLd, getWritingEntryUrl, getWritingSeoDescription, siteName, siteUrl } from '@/lib/seo';
+import {
+  buildWritingEntryJsonLd,
+  getWritingEntryUrl,
+  getWritingMetadataTitle,
+  getWritingSeoDescription,
+  siteName,
+  siteUrl,
+} from '@/lib/seo';
 import { getWritingByPath, getWritingNavigation, writings } from '@/lib/writing/registry';
 
 type Props = {
@@ -31,17 +38,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const description = getWritingSeoDescription(writing);
+  const title = getWritingMetadataTitle(writing);
   const writingUrl = getWritingEntryUrl(writing);
 
   return {
     metadataBase: new URL(siteUrl),
-    title: writing.title,
+    title,
     description,
     alternates: {
       canonical: writingUrl,
     },
     openGraph: {
-      title: `${writing.title} — Mert Ercan`,
+      title: `${title} — ${siteName}`,
       description,
       url: writingUrl,
       siteName,
@@ -59,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${writing.title} — Mert Ercan`,
+      title: `${title} — ${siteName}`,
       description,
       images: ['/opengraph-image'],
     },
