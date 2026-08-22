@@ -3,7 +3,13 @@ import Link from 'next/link';
 import Footer from '@/app/components/Footer';
 import WritingSectionNav from '@/app/components/WritingSectionNav';
 import { buildWritingJsonLd, siteName, siteUrl } from '@/lib/seo';
-import { getArticleWritings, getDialogueWritings, getPoemWritings, getStoryWritings } from '@/lib/writing/registry';
+import {
+  getArticleWritings,
+  getDialogueWritings,
+  getPoemWritings,
+  getStoryWritings,
+  getWritingKicker,
+} from '@/lib/writing/registry';
 
 const description =
   'Notes, poems, essays, stories, and small conversations I want to keep somewhere quieter than the feed.';
@@ -71,7 +77,7 @@ export default function Writing() {
             {essays.map((essay) => (
               <article key={essay.slug}>
                 <p className='text-ink/70! mb-1.5 text-sm!'>
-                  {essay.position}. deneme · <time dateTime={essay.date}>{essay.displayDate}</time>
+                  {getWritingKicker(essay)} · <time dateTime={essay.date}>{essay.displayDate}</time>
                 </p>
                 <h3 className='mb-1.5'>
                   <Link href={`/writing/denemeler/${essay.slug}`} className='text-ink hover:text-ink/70 no-underline'>
@@ -99,7 +105,7 @@ export default function Writing() {
             {stories.map((story) => (
               <article key={story.slug}>
                 <p className='text-ink/70! mb-1.5 text-sm!'>
-                  <time dateTime={story.date}>{story.displayDate}</time>
+                  {getWritingKicker(story)} · <time dateTime={story.date}>{story.displayDate}</time>
                 </p>
                 <h3 className='mb-1.5'>
                   <Link href={`/writing/${story.path.join('/')}`} className='text-ink hover:text-ink/70 no-underline'>
@@ -126,7 +132,7 @@ export default function Writing() {
             {poems.map((poem) => (
               <article key={poem.slug}>
                 <p className='text-ink/70! mb-1.5 text-sm!'>
-                  {poem.kind} · <time dateTime={poem.date}>{poem.displayDate}</time>
+                  {getWritingKicker(poem)} · <time dateTime={poem.date}>{poem.displayDate}</time>
                 </p>
                 <h3 className='mb-1.5'>
                   <Link href={`/writing/${poem.path.join('/')}`} className='text-ink hover:text-ink/70 no-underline'>
@@ -153,7 +159,7 @@ export default function Writing() {
             {talks.map((writing) => (
               <article key={writing.slug}>
                 <p className='text-ink/70! mb-1.5 text-sm!'>
-                  {writing.kind} · <time dateTime={writing.date}>{writing.displayDate}</time>
+                  {getWritingKicker(writing)} · <time dateTime={writing.date}>{writing.displayDate}</time>
                 </p>
                 <h3 className='mb-1.5'>
                   <Link href={`/writing/${writing.path.join('/')}`} className='text-ink hover:text-ink/70 no-underline'>

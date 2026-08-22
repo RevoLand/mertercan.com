@@ -10,7 +10,13 @@ import {
   siteName,
   siteUrl,
 } from '@/lib/seo';
-import { getWritingByPath, getWritingNavigation, writings } from '@/lib/writing/registry';
+import {
+  getWritingByPath,
+  getWritingKicker,
+  getWritingNavigation,
+  getWritingSection,
+  writings,
+} from '@/lib/writing/registry';
 
 type Props = {
   params: Promise<{ slug: string[] }>;
@@ -55,6 +61,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       siteName,
       locale: 'tr_TR',
       type: 'article',
+      section: getWritingSection(writing),
       publishedTime: writing.date,
       images: [
         {
@@ -97,7 +104,7 @@ export default async function WritingEntryPage({ params }: Props) {
         </div>
 
         <p className='text-ink/70 mb-3 text-sm!'>
-          {writing.kind} · <time dateTime={writing.date}>{writing.displayDate}</time>
+          {getWritingKicker(writing)} · <time dateTime={writing.date}>{writing.displayDate}</time>
         </p>
         <h1 className='mb-4 max-w-[680px] text-[2.2rem]! md:text-[3.1rem]!'>{writing.title}</h1>
         <p className='text-ink/70 mt-0! max-w-[620px] text-sm! italic'>{writing.description}</p>

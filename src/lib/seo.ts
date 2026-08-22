@@ -1,5 +1,5 @@
 import type { Project } from '@/data/projects';
-import type { WritingEntry } from '@/lib/writing/registry';
+import { getWritingSection, getWritingTypeLabel, type WritingEntry } from '@/lib/writing/registry';
 
 export const siteUrl = 'https://mertercan.com';
 export const websiteId = `${siteUrl}/#website`;
@@ -238,31 +238,8 @@ export function getWritingSeoDescription(writing: WritingEntry): string {
   return writing.seoDescription;
 }
 
-const writingMetadataTypeByGroup: Record<WritingEntry['group'], string> = {
-  denemeler: 'Deneme',
-  hikayeler: 'Hikâye',
-  konusmalar: 'Konuşma',
-  siirler: 'Şiir',
-};
-
 export function getWritingMetadataTitle(writing: Pick<WritingEntry, 'group' | 'title'>): string {
-  return `${writing.title} · ${writingMetadataTypeByGroup[writing.group]}`;
-}
-
-function getWritingSection(writing: WritingEntry): string {
-  if (writing.group === 'denemeler') {
-    return 'Denemeler';
-  }
-
-  if (writing.group === 'siirler') {
-    return 'Şiirler';
-  }
-
-  if (writing.group === 'hikayeler') {
-    return 'Hikâyeler';
-  }
-
-  return 'Konuşmalar';
+  return `${writing.title} · ${getWritingTypeLabel(writing)}`;
 }
 
 export function buildWritingEntryJsonLd(writing: WritingEntry): { '@context': string; '@graph': JsonLdNode[] } {

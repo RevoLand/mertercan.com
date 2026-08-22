@@ -47,6 +47,34 @@ export type PoemWriting = WritingBase & {
 
 export type WritingEntry = DialogueWriting | PoemWriting | ArticleWriting | StoryWriting;
 
+type WritingTaxonomy = {
+  label: string;
+  section: string;
+};
+
+const writingTaxonomyByGroup: Record<WritingGroup, WritingTaxonomy> = {
+  denemeler: { label: 'Deneme', section: 'Denemeler' },
+  hikayeler: { label: 'Hikâye', section: 'Hikâyeler' },
+  konusmalar: { label: 'Konuşma', section: 'Konuşmalar' },
+  siirler: { label: 'Şiir', section: 'Şiirler' },
+};
+
+export function getWritingTypeLabel(writing: Pick<WritingEntry, 'group'>): string {
+  return writingTaxonomyByGroup[writing.group].label;
+}
+
+export function getWritingSection(writing: Pick<WritingEntry, 'group'>): string {
+  return writingTaxonomyByGroup[writing.group].section;
+}
+
+export function getWritingKicker(writing: WritingEntry): string {
+  if (writing.group === 'denemeler') {
+    return `${getWritingTypeLabel(writing)} · ${writing.position}`;
+  }
+
+  return getWritingTypeLabel(writing);
+}
+
 const contentDirectory = path.join(process.cwd(), 'content/writing');
 const markdownProcessor = remark().use(html);
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
