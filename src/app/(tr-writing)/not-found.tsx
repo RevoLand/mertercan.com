@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/app/components/Footer';
+import { siteUrl } from '@/lib/seo';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: 'Sayfa bulunamadı',
   description: 'Bu sayfa mertercan.com üzerinde bulunamadı.',
   robots: {

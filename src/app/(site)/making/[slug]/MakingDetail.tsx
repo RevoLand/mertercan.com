@@ -38,7 +38,7 @@ export default function MakingDetail({ project }: Props) {
 
       {details.length > 0 && (
         <div className='mb-14 max-w-[620px] md:mb-16'>
-          <div className='text-ink/70 mb-4 text-sm font-medium tracking-wide uppercase'>details</div>
+          <h2 className='text-ink/70 mt-0! mb-4! text-sm! font-medium tracking-wide uppercase'>details</h2>
           <ul className='space-y-2.5'>
             {details.map((line) => (
               <li key={line} className="before:text-ink/30 text-ink/70 list-none before:mr-3 before:content-['-']">
@@ -69,7 +69,7 @@ export default function MakingDetail({ project }: Props) {
 
       {/* What changed / reflections */}
       <div className='mb-14 max-w-[620px] md:mb-16'>
-        <div className='text-ink/70 mb-4 text-sm font-medium tracking-wide uppercase'>what changed</div>
+        <h2 className='text-ink/70 mt-0! mb-4! text-sm! font-medium tracking-wide uppercase'>what changed</h2>
         <ul className='space-y-2.5'>
           {project.reflections.map((line, i) => (
             <li key={i} className="before:text-ink/30 text-ink/70 list-none before:mr-3 before:content-['-']">
@@ -82,7 +82,7 @@ export default function MakingDetail({ project }: Props) {
       {/* External links — optional */}
       {project.links && project.links.length > 0 && (
         <div className='mb-12 max-w-[620px] md:mb-14'>
-          <div className='text-ink/70 mb-3 text-sm font-medium tracking-wide uppercase'>links</div>
+          <h2 className='text-ink/70 mt-0! mb-3! text-sm! font-medium tracking-wide uppercase'>links</h2>
           <ul className='space-y-2'>
             {project.links.map((link) => (
               <li key={link.href} className='list-none'>

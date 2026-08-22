@@ -9,7 +9,7 @@ const staticPageLastModified = {
   home: '2026-08-02',
   life: '2026-08-20',
   making: '2026-08-06',
-  writing: '2026-08-14',
+  writing: '2026-08-21',
 } as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {

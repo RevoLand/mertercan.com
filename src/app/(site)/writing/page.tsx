@@ -25,6 +25,7 @@ export const metadata: Metadata = {
     description,
     url: '/writing',
     siteName,
+    locale: 'en_US',
     type: 'website',
     images: [
       {
@@ -39,6 +40,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Writing — Mert Ercan',
     description,
+    creator: '@Mert_Ercan',
     images: ['/opengraph-image'],
   },
 };
@@ -69,7 +71,7 @@ export default function Writing() {
             {essays.map((essay) => (
               <article key={essay.slug}>
                 <p className='text-ink/70! mb-1.5 text-sm!'>
-                  {essay.position}. deneme · {essay.displayDate}
+                  {essay.position}. deneme · <time dateTime={essay.date}>{essay.displayDate}</time>
                 </p>
                 <h3 className='mb-1.5'>
                   <Link href={`/writing/denemeler/${essay.slug}`} className='text-ink hover:text-ink/70 no-underline'>
@@ -96,7 +98,9 @@ export default function Writing() {
           <div className='space-y-7 md:space-y-8'>
             {stories.map((story) => (
               <article key={story.slug}>
-                <p className='text-ink/70! mb-1.5 text-sm!'>{story.displayDate}</p>
+                <p className='text-ink/70! mb-1.5 text-sm!'>
+                  <time dateTime={story.date}>{story.displayDate}</time>
+                </p>
                 <h3 className='mb-1.5'>
                   <Link href={`/writing/${story.path.join('/')}`} className='text-ink hover:text-ink/70 no-underline'>
                     {story.title}
@@ -122,7 +126,7 @@ export default function Writing() {
             {poems.map((poem) => (
               <article key={poem.slug}>
                 <p className='text-ink/70! mb-1.5 text-sm!'>
-                  {poem.kind} · {poem.displayDate}
+                  {poem.kind} · <time dateTime={poem.date}>{poem.displayDate}</time>
                 </p>
                 <h3 className='mb-1.5'>
                   <Link href={`/writing/${poem.path.join('/')}`} className='text-ink hover:text-ink/70 no-underline'>
@@ -149,7 +153,7 @@ export default function Writing() {
             {talks.map((writing) => (
               <article key={writing.slug}>
                 <p className='text-ink/70! mb-1.5 text-sm!'>
-                  {writing.kind} · {writing.displayDate}
+                  {writing.kind} · <time dateTime={writing.date}>{writing.displayDate}</time>
                 </p>
                 <h3 className='mb-1.5'>
                   <Link href={`/writing/${writing.path.join('/')}`} className='text-ink hover:text-ink/70 no-underline'>

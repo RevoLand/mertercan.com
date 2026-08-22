@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     description,
     url: '/making',
     siteName,
+    locale: 'en_US',
     type: 'website',
     images: [
       {
@@ -32,6 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Making — Mert Ercan',
     description,
+    creator: '@Mert_Ercan',
     images: ['/opengraph-image'],
   },
 };

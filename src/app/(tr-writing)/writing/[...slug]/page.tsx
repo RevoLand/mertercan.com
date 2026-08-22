@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const writing = getWritingByPath(slug);
 
   if (!writing) {
-    return { title: 'Not Found' };
+    return { metadataBase: new URL(siteUrl), title: 'Not Found' };
   }
 
   const description = getWritingSeoDescription(writing);
@@ -69,6 +69,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: `${title} — ${siteName}`,
       description,
+      creator: '@Mert_Ercan',
       images: ['/opengraph-image'],
     },
   };
@@ -96,7 +97,7 @@ export default async function WritingEntryPage({ params }: Props) {
         </div>
 
         <p className='text-ink/70 mb-3 text-sm!'>
-          {writing.kind} · {writing.displayDate}
+          {writing.kind} · <time dateTime={writing.date}>{writing.displayDate}</time>
         </p>
         <h1 className='mb-4 max-w-[680px] text-[2.2rem]! md:text-[3.1rem]!'>{writing.title}</h1>
         <p className='text-ink/70 mt-0! max-w-[620px] text-sm! italic'>{writing.description}</p>

@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     description,
     url: '/life',
     siteName,
+    locale: 'en_US',
     type: 'website',
     images: [
       {
@@ -31,12 +32,14 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Life — Mert Ercan',
     description,
+    creator: '@Mert_Ercan',
     images: ['/opengraph-image'],
   },
 };
 
 type Entry = {
   date: string;
+  dateTime: string;
   intro?: string;
   notes: LifeNote[];
 };
@@ -52,6 +55,7 @@ type LifeNote = {
 const entries: Entry[] = [
   {
     date: 'August 2026',
+    dateTime: '2026-08',
     intro:
       'Writing kept moving. A talk from last year found its place here, while responsibility led to questions about healthy boundaries and subjectivity.',
     notes: [
@@ -86,6 +90,7 @@ const entries: Entry[] = [
   },
   {
     date: 'July 2026',
+    dateTime: '2026-07',
     intro:
       'Writing changed shape this month. One piece became a public tool. A few essays found their place on the site, and the conversation continued.',
     notes: [
@@ -114,6 +119,7 @@ const entries: Entry[] = [
   },
   {
     date: 'June 2026',
+    dateTime: '2026-06',
     intro:
       'A lot had been building quietly. Projects existed but the site had not caught up yet. This update was mostly about closing that gap.',
     notes: [
@@ -146,7 +152,9 @@ export default function Life() {
         <div className='max-w-[620px] space-y-14 md:space-y-16'>
           {entries.map((entry) => (
             <div key={entry.date}>
-              <p className='text-ink/70 mb-4 text-sm! font-medium tracking-wide uppercase'>{entry.date}</p>
+              <h2 className='text-ink/70 mt-0! mb-4! text-sm! font-medium tracking-wide uppercase'>
+                <time dateTime={entry.dateTime}>{entry.date}</time>
+              </h2>
               {entry.intro && <p className='text-ink/75 mb-6 italic'>{entry.intro}</p>}
               <ul className='space-y-2.5'>
                 {entry.notes.map((note, i) => (

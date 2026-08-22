@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = getProjectBySlug(slug);
 
   if (!project) {
-    return { title: 'Not Found' };
+    return { metadataBase: new URL(siteUrl), title: 'Not Found' };
   }
 
   const description = getProjectDescription(project);
@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description,
       url: `/making/${project.slug}`,
       siteName,
+      locale: 'en_US',
       type: 'website',
       images: [
         {
@@ -51,6 +52,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       card: 'summary_large_image',
       title: `${project.title} — Mert Ercan`,
       description,
+      creator: '@Mert_Ercan',
       images: ['/opengraph-image'],
     },
   };
