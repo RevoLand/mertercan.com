@@ -80,6 +80,10 @@ const entries: Entry[] = [
         relatedLink: { href: '/writing#arena', label: 'Arena' },
       },
       {
+        text: 'Arena continued with a third story about a king questioning the role he was given and the judgment expected of him.',
+        relatedLink: { href: '/writing/hikayeler/arena-iii-hukum', label: 'Arena III — Hüküm' },
+      },
+      {
         text: "Added the leadership talk I presented on stage at the end of 2025, connecting Irvin Yalom's existential approach with leading oneself.",
         relatedLink: {
           href: '/writing/liderlik-yalom-ve-kendine-liderlik-etmek',

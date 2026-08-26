@@ -4,6 +4,7 @@ import path from 'node:path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
+import remarkDialogue from './remark-dialogue';
 
 export type WritingGroup = 'denemeler' | 'siirler' | 'konusmalar' | 'hikayeler';
 export type WritingFormat = 'dialogue' | 'poem' | 'article' | 'story';
@@ -77,6 +78,7 @@ export function getWritingKicker(writing: WritingEntry): string {
 
 const contentDirectory = path.join(process.cwd(), 'content/writing');
 const markdownProcessor = remark().use(html);
+const storyMarkdownProcessor = remark().use(remarkDialogue).use(html);
 const slugPattern = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 type MarkdownNode = {
@@ -157,7 +159,8 @@ function loadWriting(relativeFilePath: string): WritingEntry {
   const publicPath = relativeFilePath.replace(/\.md$/, '').split(path.sep);
   const group = parseGroup(data.group, relativeFilePath);
   const format = parseFormat(data.format, relativeFilePath);
-  const markdownTree = markdownProcessor.parse(content);
+  const processor = format === 'story' ? storyMarkdownProcessor : markdownProcessor;
+  const markdownTree = processor.parse(content);
 
   if (publicPath.some((segment) => !slugPattern.test(segment))) {
     throw new Error(`${relativeFilePath}: path segments must use lowercase kebab-case.`);
@@ -180,7 +183,7 @@ function loadWriting(relativeFilePath: string): WritingEntry {
     description,
     seoDescription: optionalString(data.seoDescription, description, 'seoDescription', relativeFilePath),
     keywords: parseKeywords(data.keywords, relativeFilePath),
-    contentHtml: String(markdownProcessor.processSync(content)),
+    contentHtml: String(processor.processSync(content)),
   };
 
   if (group === 'denemeler') {
