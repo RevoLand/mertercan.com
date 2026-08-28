@@ -92,6 +92,10 @@ const entries: Entry[] = [
         relatedLink: { href: '/writing/hikayeler/arena-v-bekleyis', label: 'Arena V — Bekleyiş' },
       },
       {
+        text: 'Arena continued with a sixth story about an unnamed advisor facing the emptiness left by a king and questioning the role he was given.',
+        relatedLink: { href: '/writing/hikayeler/arena-vi-bosluk', label: 'Arena VI — Boşluk' },
+      },
+      {
         text: "Added the leadership talk I presented on stage at the end of 2025, connecting Irvin Yalom's existential approach with leading oneself.",
         relatedLink: {
           href: '/writing/liderlik-yalom-ve-kendine-liderlik-etmek',
