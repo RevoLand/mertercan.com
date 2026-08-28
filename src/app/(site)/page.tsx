@@ -3,8 +3,24 @@ import Footer from '@/app/components/Footer';
 import Hero from '@/app/components/Hero';
 import Section from '@/app/components/Section';
 import { buildHomeJsonLd } from '@/lib/seo';
+import { getWritingByPath } from '@/lib/writing/registry';
 
 const jsonLd = buildHomeJsonLd();
+
+const selectedWritings = [
+  ['siirler', 'tedbir'],
+  ['denemeler', 'sorumluluk'],
+  ['denemeler', 'saglikli-sinirlar'],
+  ['denemeler', 'oznellik'],
+].map((pathSegments) => {
+  const writing = getWritingByPath(pathSegments);
+
+  if (!writing) {
+    throw new Error(`Selected writing not found: ${pathSegments.join('/')}`);
+  }
+
+  return writing;
+});
 
 export default function Home() {
   return (
@@ -57,6 +73,85 @@ export default function Home() {
             </p>
           </div>
         </div>
+      </Section>
+
+      <div className='section-divider mb-16 md:mb-24' />
+
+      <Section title='Selected Writing'>
+        <div className='max-w-lg space-y-10 md:space-y-12' lang='tr'>
+          <section aria-labelledby='selected-stories-heading'>
+            <h3
+              id='selected-stories-heading'
+              className='text-ink/70 mb-5 text-sm! font-medium tracking-wide uppercase md:mb-6'
+            >
+              Hikâyeler
+            </h3>
+            <article>
+              <h4 className='text-ink mb-1.5 text-[1.125rem] leading-snug font-medium tracking-tight md:text-[1.25rem]'>
+                <Link href='/writing#arena' className='text-ink hover:text-ink/70 no-underline'>
+                  Arena
+                </Link>
+              </h4>
+              <p className='text-ink/70 mt-0! text-sm!'>Birbirini yıllar sonra bulan kısa hikâyeler.</p>
+            </article>
+          </section>
+
+          <section aria-labelledby='selected-poems-heading'>
+            <h3
+              id='selected-poems-heading'
+              className='text-ink/70 mb-5 text-sm! font-medium tracking-wide uppercase md:mb-6'
+            >
+              Şiirler
+            </h3>
+            {selectedWritings
+              .filter((writing) => writing.group === 'siirler')
+              .map((writing) => (
+                <article key={writing.slug}>
+                  <h4 className='text-ink mb-1.5 text-[1.125rem] leading-snug font-medium tracking-tight md:text-[1.25rem]'>
+                    <Link
+                      href={`/writing/${writing.path.join('/')}`}
+                      className='text-ink hover:text-ink/70 no-underline'
+                    >
+                      {writing.title}
+                    </Link>
+                  </h4>
+                  <p className='text-ink/70 mt-0! text-sm!'>{writing.description}</p>
+                </article>
+              ))}
+          </section>
+
+          <section aria-labelledby='selected-essays-heading'>
+            <h3
+              id='selected-essays-heading'
+              className='text-ink/70 mb-5 text-sm! font-medium tracking-wide uppercase md:mb-6'
+            >
+              Denemeler
+            </h3>
+            <div className='space-y-7 md:space-y-8'>
+              {selectedWritings
+                .filter((writing) => writing.group === 'denemeler')
+                .map((writing) => (
+                  <article key={writing.slug}>
+                    <h4 className='text-ink mb-1.5 text-[1.125rem] leading-snug font-medium tracking-tight md:text-[1.25rem]'>
+                      <Link
+                        href={`/writing/${writing.path.join('/')}`}
+                        className='text-ink hover:text-ink/70 no-underline'
+                      >
+                        {writing.title}
+                      </Link>
+                    </h4>
+                    <p className='text-ink/70 mt-0! text-sm!'>{writing.description}</p>
+                  </article>
+                ))}
+            </div>
+          </section>
+        </div>
+        <Link
+          href='/writing'
+          className='text-ink/70 hover:text-ink/90 decoration-ink/40 mt-8 inline-block text-sm underline underline-offset-2 transition-colors'
+        >
+          all writing →
+        </Link>
       </Section>
 
       <div className='section-divider mb-16 md:mb-24' />

@@ -10,7 +10,7 @@ export const siteAlternateNames = ['mertercan.com', 'mertercan'];
 export const personAlternateNames = ['mertcreates'];
 export const siteTitle = 'Mert Ercan — frontend developer creating with clarity';
 export const siteDescription =
-  'Mert Ercan is a frontend developer exploring how small things grow into meaning, through clear structures, thoughtful work, and tiny creative worlds.';
+  'Mert Ercan is a frontend developer building thoughtful tools and systems, and following small ideas into stories about meaning, relationships, and growth.';
 export const socialLinks = [
   'https://www.pinterest.com/mertcreates',
   'https://github.com/mertcreates',
@@ -62,7 +62,14 @@ export function buildHomeJsonLd(): { '@context': string; '@graph': JsonLdNode[] 
         mainEntityOfPage: {
           '@id': profilePageId,
         },
-        knowsAbout: ['frontend development', 'readable UI systems', 'developer tools', 'creative systems'],
+        knowsAbout: [
+          'frontend development',
+          'readable UI systems',
+          'developer tools',
+          'creative systems',
+          'writing',
+          'storytelling',
+        ],
       },
     ],
   };

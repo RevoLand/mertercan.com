@@ -6,7 +6,7 @@ import { getWritingLastModified, writings } from '@/lib/writing/registry';
 export const dynamic = 'force-static';
 
 const staticPageLastModified = {
-  home: '2026-08-02',
+  home: '2026-08-28',
   life: '2026-08-20',
   making: '2026-08-06',
   writing: '2026-08-21',
