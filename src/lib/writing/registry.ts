@@ -9,6 +9,38 @@ import remarkDialogue from './remark-dialogue';
 export type WritingGroup = 'denemeler' | 'siirler' | 'konusmalar' | 'hikayeler';
 export type WritingFormat = 'dialogue' | 'poem' | 'article' | 'story';
 
+export type WritingSeriesDefinition = Readonly<{
+  slug: string;
+  title: string;
+  description: string;
+  hubPath: `/${string}`;
+  inLanguage: string;
+}>;
+
+const writingSeriesDefinitions: Record<string, WritingSeriesDefinition> = {
+  arena: {
+    slug: 'arena',
+    title: 'Arena',
+    description: 'Birbirini yıllar sonra bulan kısa hikâyeler.',
+    hubPath: '/arena',
+    inLanguage: 'tr',
+  },
+};
+
+export function getWritingSeriesDefinition(series: string): WritingSeriesDefinition {
+  const definition = writingSeriesDefinitions[series];
+
+  if (!Object.prototype.hasOwnProperty.call(writingSeriesDefinitions, series) || !definition) {
+    throw new Error(`Unknown writing series: ${series}`);
+  }
+
+  if (definition.slug !== series) {
+    throw new Error(`Writing series definition slug does not match its key: ${series}`);
+  }
+
+  return definition;
+}
+
 type WritingBase = {
   slug: string;
   path: string[];
@@ -257,6 +289,12 @@ function loadWritings(): WritingEntry[] {
   const publicPaths = new Set<string>();
 
   for (const entry of entries) {
+    if (entry.series) {
+      getWritingSeriesDefinition(entry.series);
+    }
+  }
+
+  for (const entry of entries) {
     const publicPath = entry.path.join('/');
 
     if (publicPaths.has(publicPath)) {
@@ -317,17 +355,17 @@ export function getPoemWritings(): PoemWriting[] {
     .sort((first, second) => second.date.localeCompare(first.date));
 }
 
-type OrderedWriting = DialogueWriting | StoryWriting;
+export type WritingSeriesEntry = DialogueWriting | StoryWriting;
 
-export function getWritingSeries(series: string): OrderedWriting[] {
+export function getWritingSeries(series: string): WritingSeriesEntry[] {
   return writings
-    .filter((writing): writing is OrderedWriting => 'position' in writing && writing.series === series)
+    .filter((writing): writing is WritingSeriesEntry => 'position' in writing && writing.series === series)
     .sort((first, second) => first.position - second.position);
 }
 
 export function getSeriesNavigation(writing: WritingEntry): {
-  previous?: OrderedWriting;
-  next?: OrderedWriting;
+  previous?: WritingSeriesEntry;
+  next?: WritingSeriesEntry;
   index?: number;
   total?: number;
 } {

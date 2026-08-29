@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/app/components/Footer';
-import { getWritingSeries } from '@/lib/writing/registry';
-import { siteName, siteUrl } from '@/lib/seo';
+import { getWritingSeries, getWritingSeriesDefinition } from '@/lib/writing/registry';
+import { buildWritingSeriesJsonLd, siteName, siteUrl } from '@/lib/seo';
 
-const description = 'Birbirini yıllar sonra bulan kısa hikâyeler.';
-const arenaStories = getWritingSeries('arena');
+const arenaSeries = getWritingSeriesDefinition('arena');
+const arenaStories = getWritingSeries(arenaSeries.slug);
+const arenaJsonLd = buildWritingSeriesJsonLd(arenaSeries, arenaStories);
 
 type ArenaStory = (typeof arenaStories)[number];
 
@@ -26,15 +27,15 @@ function getStoryHref(story: ArenaStory): string {
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'Arena',
-  description,
+  title: arenaSeries.title,
+  description: arenaSeries.description,
   alternates: {
-    canonical: '/arena',
+    canonical: arenaSeries.hubPath,
   },
   openGraph: {
-    title: `Arena — ${siteName}`,
-    description,
-    url: '/arena',
+    title: `${arenaSeries.title} — ${siteName}`,
+    description: arenaSeries.description,
+    url: arenaSeries.hubPath,
     siteName,
     locale: 'tr_TR',
     type: 'website',
@@ -49,8 +50,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `Arena — ${siteName}`,
-    description,
+    title: `${arenaSeries.title} — ${siteName}`,
+    description: arenaSeries.description,
     creator: '@Mert_Ercan',
     images: ['/opengraph-image'],
   },
@@ -59,6 +60,7 @@ export const metadata: Metadata = {
 export default function Arena() {
   return (
     <main className='min-h-screen'>
+      <script type='application/ld+json' dangerouslySetInnerHTML={{ __html: JSON.stringify(arenaJsonLd) }} />
       <section className='writing-content container-base pt-14 pb-24 md:pt-20 md:pb-[150px]' lang='tr'>
         <div className='mb-10 md:mb-14'>
           <Link href='/writing' className='text-ink/70 hover:text-ink/85 text-sm no-underline transition-colors'>
@@ -67,11 +69,11 @@ export default function Arena() {
         </div>
 
         <header className='max-w-[620px]'>
-          <h1 className='mb-3'>Arena</h1>
-          <p className='text-ink/70 mt-0! max-w-[620px] text-sm! italic'>{description}</p>
+          <h1 className='mb-3'>{arenaSeries.title}</h1>
+          <p className='text-ink/70 mt-0! max-w-[620px] text-sm! italic'>{arenaSeries.description}</p>
           <p className='text-ink/70 mt-3 text-sm!'>{arenaStories.length} hikâye</p>
 
-          <nav aria-label='Arena bağlantıları' className='mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm'>
+          <nav aria-label={`${arenaSeries.title} bağlantıları`} className='mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm'>
             <Link href={getStoryHref(firstStory)} className='text-ink hover:text-ink/70 font-medium no-underline'>
               Seriye başla →
             </Link>
@@ -81,7 +83,7 @@ export default function Arena() {
           </nav>
         </header>
 
-        <section aria-label='Arena hikâyeleri' className='mt-12 max-w-[620px] md:mt-16'>
+        <section aria-label={`${arenaSeries.title} hikâyeleri`} className='mt-12 max-w-[620px] md:mt-16'>
           <ol className='space-y-7 md:space-y-8'>
             {arenaStories.map((story) => (
               <li key={story.slug}>
@@ -92,7 +94,7 @@ export default function Arena() {
                     </Link>
                   </h2>
                   <p className='text-ink/70! mb-1.5 text-sm!'>
-                    Arena · {story.position} · <time dateTime={story.date}>{story.displayDate}</time>
+                    {arenaSeries.title} · {story.position} · <time dateTime={story.date}>{story.displayDate}</time>
                   </p>
                   <p className='text-ink/70 mt-0! text-sm!'>{story.description}</p>
                 </article>
