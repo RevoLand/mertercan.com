@@ -96,6 +96,10 @@ const entries: Entry[] = [
         relatedLink: { href: '/writing/hikayeler/arena-vi-bosluk', label: 'Arena VI — Boşluk' },
       },
       {
+        text: 'Arena continued with a seventh story about a man trying to make sense of a gladiator dream and wondering whether he needs to find its answers right away.',
+        relatedLink: { href: '/writing/hikayeler/arena-vii-soru', label: 'Arena VII — Soru' },
+      },
+      {
         text: "Added the leadership talk I presented on stage at the end of 2025, connecting Irvin Yalom's existential approach with leading oneself.",
         relatedLink: {
           href: '/writing/liderlik-yalom-ve-kendine-liderlik-etmek',
