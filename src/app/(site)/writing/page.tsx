@@ -9,12 +9,14 @@ import {
   getPoemWritings,
   getStoryWritings,
   getWritingKicker,
+  getWritingSeries,
 } from '@/lib/writing/registry';
 
 const description =
   'Notes, poems, essays, stories, and small conversations I want to keep somewhere quieter than the feed.';
 const essays = getDialogueWritings();
 const stories = getStoryWritings();
+const arenaStories = getWritingSeries('arena');
 const poems = getPoemWritings();
 const talks = getArticleWritings();
 const writingJsonLd = buildWritingJsonLd([...essays, ...stories, ...poems, ...talks], description);
@@ -97,12 +99,14 @@ export default function Writing() {
           lang='tr'
         >
           <h2 id='arena-heading' className='mb-4 text-[1.45rem]! md:text-[1.75rem]!'>
-            Arena
+            <Link href='/arena' className='text-ink hover:text-ink/70 no-underline'>
+              Arena
+            </Link>
           </h2>
           <p className='text-ink/70 mb-10 max-w-[58ch]'>Birbirini yıllar sonra bulan kısa hikâyeler.</p>
 
           <div className='space-y-7 md:space-y-8'>
-            {stories.map((story) => (
+            {arenaStories.map((story) => (
               <article key={story.slug}>
                 <p className='text-ink/70! mb-1.5 text-sm!'>
                   {getWritingKicker(story)} · <time dateTime={story.date}>{story.displayDate}</time>

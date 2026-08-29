@@ -7,6 +7,7 @@ description: "Yağmur altında yürüyen bir çiftin, tartışmalarına verdikle
 seoDescription: "Arena serisinin dördüncü hikâyesi; yağmur altında yürüyen bir çiftin, geçmişteki yakınlıklarıyla bugünkü kırgınlıkları arasında verdikleri kısa bir arayı anlatıyor."
 group: "hikayeler"
 format: "story"
+series: "arena"
 position: 4
 ---
 

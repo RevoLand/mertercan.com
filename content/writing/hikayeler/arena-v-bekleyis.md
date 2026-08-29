@@ -7,6 +7,7 @@ description: "Komadaki eşinin başında bekleyen bir kadının, yağmurun ve an
 seoDescription: "Arena serisinin beşinci hikâyesi; komadaki eşinin başında bekleyen bir kadının, geçmişteki anılar, yağmur ve belirsizlik içinde sevdiğinin yanında kalışını anlatıyor."
 group: "hikayeler"
 format: "story"
+series: "arena"
 position: 5
 ---
 

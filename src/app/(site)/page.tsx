@@ -88,7 +88,7 @@ export default function Home() {
             </h3>
             <article>
               <h4 className='text-ink mb-1.5 text-[1.125rem] leading-snug font-medium tracking-tight md:text-[1.25rem]'>
-                <Link href='/writing#arena' className='text-ink hover:text-ink/70 no-underline'>
+                <Link href='/arena' className='text-ink hover:text-ink/70 no-underline'>
                   Arena
                 </Link>
               </h4>

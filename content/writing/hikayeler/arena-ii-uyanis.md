@@ -7,6 +7,7 @@ description: "Savaşın bedende bıraktığı izlerin, sabit bir zemin ve yağmu
 seoDescription: "Bir gladyatörün savaş sonrası uyanışını; bedende kalan refleksler, yağmurun tadı ve kılıçsız yeniden uykuya dönüş üzerinden anlatan kısa hikâye."
 group: "hikayeler"
 format: "story"
+series: "arena"
 position: 2
 ---
 

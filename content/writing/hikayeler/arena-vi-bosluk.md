@@ -7,6 +7,7 @@ description: "Boş bir tahtın yanında kalan isimsiz bir danışmanın, rolü o
 seoDescription: "Arena serisinin altıncı hikâyesi; kralın ardında bıraktığı boşlukla yüzleşen isimsiz bir danışmanın, rolü, kimliği ve hüküm verme zorunluluğunu sorgulayışını anlatıyor."
 group: "hikayeler"
 format: "story"
+series: "arena"
 position: 6
 ---
 

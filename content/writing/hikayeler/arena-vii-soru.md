@@ -7,6 +7,7 @@ description: "Bir rüyanın bıraktığı soru işaretlerinin peşine düşen bi
 seoDescription: "Arena serisinin yedinci hikâyesi; gördüğü gladyatör rüyasını anlamlandırmaya çalışan bir adamın, semboller, belirsizlik ve cevap arayışıyla yüzleşmesini anlatıyor."
 group: "hikayeler"
 format: "story"
+series: "arena"
 position: 7
 ---
 

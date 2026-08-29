@@ -7,6 +7,7 @@ description: "Hareket eden bir zeminde, yüzleri bulanık rakiplere karşı veri
 seoDescription: "Bir gladyatörün arenadaki mücadelesini; bulanık yüzler, maskeli seyirciler, tuzlu yağmur ve beklenmedik bir uyanış üzerinden anlatan kısa hikâye."
 group: "hikayeler"
 format: "story"
+series: "arena"
 position: 1
 ---
 

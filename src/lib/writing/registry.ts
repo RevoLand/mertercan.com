@@ -20,6 +20,7 @@ type WritingBase = {
   description: string;
   seoDescription: string;
   keywords: string[];
+  series?: string;
   kind: string;
   contentHtml: string;
 };
@@ -96,6 +97,10 @@ function requiredString(value: unknown, field: string, filePath: string): string
 
 function optionalString(value: unknown, fallback: string, field: string, filePath: string): string {
   return value === undefined ? fallback : requiredString(value, field, filePath);
+}
+
+function optionalStringValue(value: unknown, field: string, filePath: string): string | undefined {
+  return value === undefined ? undefined : requiredString(value, field, filePath);
 }
 
 function parseKeywords(value: unknown, filePath: string): string[] {
@@ -183,6 +188,7 @@ function loadWriting(relativeFilePath: string): WritingEntry {
     description,
     seoDescription: optionalString(data.seoDescription, description, 'seoDescription', relativeFilePath),
     keywords: parseKeywords(data.keywords, relativeFilePath),
+    series: optionalStringValue(data.series, 'series', relativeFilePath),
     contentHtml: String(processor.processSync(content)),
   };
 
@@ -309,6 +315,39 @@ export function getPoemWritings(): PoemWriting[] {
   return writings
     .filter((writing): writing is PoemWriting => writing.group === 'siirler')
     .sort((first, second) => second.date.localeCompare(first.date));
+}
+
+type OrderedWriting = DialogueWriting | StoryWriting;
+
+export function getWritingSeries(series: string): OrderedWriting[] {
+  return writings
+    .filter((writing): writing is OrderedWriting => 'position' in writing && writing.series === series)
+    .sort((first, second) => first.position - second.position);
+}
+
+export function getSeriesNavigation(writing: WritingEntry): {
+  previous?: OrderedWriting;
+  next?: OrderedWriting;
+  index?: number;
+  total?: number;
+} {
+  if (!writing.series || !('position' in writing)) {
+    return {};
+  }
+
+  const sequence = getWritingSeries(writing.series);
+  const index = sequence.findIndex((entry) => entry.path.join('/') === writing.path.join('/'));
+
+  if (index === -1) {
+    return {};
+  }
+
+  return {
+    previous: sequence[index - 1],
+    next: sequence[index + 1],
+    index: index + 1,
+    total: sequence.length,
+  };
 }
 
 export function getWritingByPath(pathSegments: string[]): WritingEntry | undefined {

@@ -14,6 +14,7 @@ import {
   getWritingByPath,
   getWritingKicker,
   getWritingNavigation,
+  getSeriesNavigation,
   getWritingSection,
   writings,
 } from '@/lib/writing/registry';
@@ -91,7 +92,8 @@ export default async function WritingEntryPage({ params }: Props) {
   }
 
   const writingJsonLd = buildWritingEntryJsonLd(writing);
-  const navigation = getWritingNavigation(writing);
+  const arenaNavigation = writing.series === 'arena' ? getSeriesNavigation(writing) : undefined;
+  const navigation = writing.series === 'arena' ? undefined : getWritingNavigation(writing);
 
   return (
     <main className='min-h-screen'>
@@ -114,31 +116,70 @@ export default async function WritingEntryPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: writing.contentHtml }}
         />
 
-        {(writing.group === 'denemeler' || writing.group === 'hikayeler') && (
+        {writing.series === 'arena' ? (
           <div data-nosnippet=''>
-            <nav className='border-ink/8 flex max-w-[680px] flex-col gap-5 border-t pt-8 md:flex-row md:items-start md:justify-between'>
-              <div>
-                {navigation.previous && (
+            <nav
+              aria-label='Arena serisi'
+              className='border-ink/8 grid max-w-[680px] gap-y-5 border-t pt-8 leading-5 md:grid-cols-[1fr_auto_1fr] md:gap-x-8 md:gap-y-3'
+            >
+              {arenaNavigation?.previous && (
+                <div className='order-2 md:order-none md:col-start-1 md:row-start-1'>
                   <Link
-                    href={`/writing/${navigation.previous.path.join('/')}`}
+                    href={`/writing/${arenaNavigation.previous.path.join('/')}`}
                     className='text-ink/70 hover:text-ink text-sm no-underline transition-colors'
                   >
-                    ← {navigation.previous.title}
+                    ← {arenaNavigation.previous.title}
                   </Link>
-                )}
-              </div>
-              <div className='md:text-right'>
-                {navigation.next && (
+                </div>
+              )}
+              <p className='text-ink/70 order-1 mb-0 text-sm! leading-5! md:order-none md:col-start-2 md:row-start-1 md:text-center'>
+                Arena serisi · {arenaNavigation?.index}/{arenaNavigation?.total}
+              </p>
+              {arenaNavigation?.next && (
+                <div className='order-3 md:col-start-3 md:row-start-1 md:text-right'>
                   <Link
-                    href={`/writing/${navigation.next.path.join('/')}`}
+                    href={`/writing/${arenaNavigation.next.path.join('/')}`}
                     className='text-ink/70 hover:text-ink text-sm no-underline transition-colors'
                   >
-                    {navigation.next.title} →
+                    {arenaNavigation.next.title} →
                   </Link>
-                )}
+                </div>
+              )}
+              <div className='order-4 md:col-span-3 md:row-start-2 md:text-center'>
+                <Link href='/arena' className='text-ink/70 hover:text-ink text-sm no-underline transition-colors'>
+                  Tüm Arena hikâyeleri
+                </Link>
               </div>
             </nav>
           </div>
+        ) : (
+          (writing.group === 'denemeler' || writing.group === 'hikayeler') &&
+          navigation && (
+            <div data-nosnippet=''>
+              <nav className='border-ink/8 flex max-w-[680px] flex-col gap-5 border-t pt-8 md:flex-row md:items-start md:justify-between'>
+                <div>
+                  {navigation.previous && (
+                    <Link
+                      href={`/writing/${navigation.previous.path.join('/')}`}
+                      className='text-ink/70 hover:text-ink text-sm no-underline transition-colors'
+                    >
+                      ← {navigation.previous.title}
+                    </Link>
+                  )}
+                </div>
+                <div className='md:text-right'>
+                  {navigation.next && (
+                    <Link
+                      href={`/writing/${navigation.next.path.join('/')}`}
+                      className='text-ink/70 hover:text-ink text-sm no-underline transition-colors'
+                    >
+                      {navigation.next.title} →
+                    </Link>
+                  )}
+                </div>
+              </nav>
+            </div>
+          )
         )}
       </article>
 

@@ -10,6 +10,7 @@ const staticPageLastModified = {
   life: '2026-08-20',
   making: '2026-08-06',
   writing: '2026-08-21',
+  arena: '2026-08-29',
 } as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -37,6 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: staticPageLastModified.writing,
       changeFrequency: 'monthly',
       priority: 0.6,
+    },
+    {
+      url: `${siteUrl}/arena`,
+      lastModified: staticPageLastModified.arena,
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     ...projects.map((p) => ({
       url: `${siteUrl}/making/${p.slug}`,

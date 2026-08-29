@@ -7,6 +7,7 @@ description: "Bir kralın, gladyatörler ve maskeli kalabalık karşısında ken
 seoDescription: "Arena serisinin üçüncü hikâyesi; bir kralın, gladyatörler ve maskeli kalabalık karşısında kendisine biçilen rolü ve vermesi beklenen hükmü sorgulayışını anlatıyor."
 group: "hikayeler"
 format: "story"
+series: "arena"
 position: 3
 ---
 
