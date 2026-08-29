@@ -71,6 +71,16 @@ export default function TurkishWritingLayout({
         <div id='main-content' tabIndex={-1}>
           {children}
         </div>
+        {process.env.NODE_ENV === 'production' && (
+          <>
+            <Script src='https://www.googletagmanager.com/gtag/js?id=G-SB32W6LXXW' strategy='afterInteractive' />
+            <Script id='google-analytics' strategy='afterInteractive'>
+              {
+                "window.dataLayer = window.dataLayer || [];\nfunction gtag(){window.dataLayer.push(arguments);}\ngtag('js', new Date());\ngtag('config', 'G-SB32W6LXXW');"
+              }
+            </Script>
+          </>
+        )}
         <Script id='quiet-nod'>
           {
             'if (!window._q) { window._q = true; console.log("you found the quiet part.\\n\\nmaybe we care about the same small things.\\n\\nme@mertercan.com"); }'
