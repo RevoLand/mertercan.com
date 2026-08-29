@@ -18,7 +18,11 @@ const arenaSeries = getWritingSeries('arena');
 const denemelerSeries = getWritingSeries('denemeler');
 const poems = getPoemWritings();
 const talks = getArticleWritings();
-const writingJsonLd = buildWritingJsonLd([...denemelerSeries.entries, ...stories, ...poems, ...talks], description);
+const writingJsonLd = buildWritingJsonLd({
+  entries: [...denemelerSeries.entries, ...stories, ...poems, ...talks],
+  description,
+  series: [denemelerSeries, arenaSeries],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -96,11 +100,11 @@ export default function Writing() {
           lang='tr'
         >
           <h2 id='arena-heading' className='mb-4 text-[1.45rem]! md:text-[1.75rem]!'>
-            <Link href='/arena' className='text-ink hover:text-ink/70 no-underline'>
-              Arena
+            <Link href={arenaSeries.hubPath} className='text-ink hover:text-ink/70 no-underline'>
+              {arenaSeries.title}
             </Link>
           </h2>
-          <p className='text-ink/70 mb-10 max-w-[58ch]'>Birbirini yıllar sonra bulan kısa hikâyeler.</p>
+          <p className='text-ink/70 mb-10 max-w-[58ch]'>{arenaSeries.description}</p>
 
           <div className='space-y-7 md:space-y-8'>
             {arenaSeries.entries.map((story) => (

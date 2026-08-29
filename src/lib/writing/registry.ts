@@ -9,7 +9,7 @@ import remarkDialogue from './remark-dialogue';
 export type WritingGroup = 'denemeler' | 'siirler' | 'konusmalar' | 'hikayeler';
 export type WritingFormat = 'dialogue' | 'poem' | 'article' | 'story';
 
-export type WritingSeriesDefinition = Readonly<{
+type WritingSeriesDefinitionFields = Readonly<{
   slug: string;
   title: string;
   description: string;
@@ -17,7 +17,7 @@ export type WritingSeriesDefinition = Readonly<{
   inLanguage: string;
 }>;
 
-const writingSeriesDefinitions: Record<string, WritingSeriesDefinition> = {
+const writingSeriesDefinitions = {
   arena: {
     slug: 'arena',
     title: 'Arena',
@@ -33,14 +33,22 @@ const writingSeriesDefinitions: Record<string, WritingSeriesDefinition> = {
     hubPath: '/writing#denemeler',
     inLanguage: 'tr',
   },
-};
+} as const satisfies Record<string, WritingSeriesDefinitionFields>;
+
+export type WritingSeriesSlug = keyof typeof writingSeriesDefinitions;
+
+export type WritingSeriesDefinition = (typeof writingSeriesDefinitions)[WritingSeriesSlug];
+
+function isWritingSeriesSlug(value: string): value is WritingSeriesSlug {
+  return Object.prototype.hasOwnProperty.call(writingSeriesDefinitions, value);
+}
 
 function getWritingSeriesDefinition(series: string): WritingSeriesDefinition {
-  const definition = writingSeriesDefinitions[series];
-
-  if (!Object.prototype.hasOwnProperty.call(writingSeriesDefinitions, series) || !definition) {
+  if (!isWritingSeriesSlug(series)) {
     throw new Error(`Unknown writing series: ${series}`);
   }
+
+  const definition = writingSeriesDefinitions[series];
 
   if (definition.slug !== series) {
     throw new Error(`Writing series definition slug does not match its key: ${series}`);
@@ -60,7 +68,6 @@ type WritingBase = {
   description: string;
   seoDescription: string;
   keywords: string[];
-  series?: string;
   kind: string;
   contentHtml: string;
 };
@@ -69,22 +76,26 @@ export type DialogueWriting = WritingBase & {
   group: 'denemeler';
   format: 'dialogue';
   position: number;
+  series?: WritingSeriesSlug;
 };
 
 export type ArticleWriting = WritingBase & {
   group: 'konusmalar';
   format: 'article';
+  series?: never;
 };
 
 export type StoryWriting = WritingBase & {
   group: 'hikayeler';
   format: 'story';
   position: number;
+  series?: WritingSeriesSlug;
 };
 
 export type PoemWriting = WritingBase & {
   group: 'siirler';
   format: 'poem';
+  series?: never;
 };
 
 export type WritingEntry = DialogueWriting | PoemWriting | ArticleWriting | StoryWriting;
@@ -139,8 +150,12 @@ function optionalString(value: unknown, fallback: string, field: string, filePat
   return value === undefined ? fallback : requiredString(value, field, filePath);
 }
 
-function optionalStringValue(value: unknown, field: string, filePath: string): string | undefined {
-  return value === undefined ? undefined : requiredString(value, field, filePath);
+function optionalWritingSeries(value: unknown, filePath: string): WritingSeriesSlug | undefined {
+  if (value === undefined) {
+    return undefined;
+  }
+
+  return getWritingSeriesDefinition(requiredString(value, 'series', filePath)).slug;
 }
 
 function parseKeywords(value: unknown, filePath: string): string[] {
@@ -216,6 +231,7 @@ function loadWriting(relativeFilePath: string): WritingEntry {
   }
 
   const description = requiredString(data.description, 'description', relativeFilePath);
+  const series = optionalWritingSeries(data.series, relativeFilePath);
 
   const common = {
     slug: publicPath.at(-1)!,
@@ -228,7 +244,6 @@ function loadWriting(relativeFilePath: string): WritingEntry {
     description,
     seoDescription: optionalString(data.seoDescription, description, 'seoDescription', relativeFilePath),
     keywords: parseKeywords(data.keywords, relativeFilePath),
-    series: optionalStringValue(data.series, 'series', relativeFilePath),
     contentHtml: String(processor.processSync(content)),
   };
 
@@ -245,6 +260,7 @@ function loadWriting(relativeFilePath: string): WritingEntry {
       format,
       kind: `${position}. deneme`,
       position,
+      series,
     };
   }
 
@@ -261,12 +277,17 @@ function loadWriting(relativeFilePath: string): WritingEntry {
       format,
       kind: `${position}. hikâye`,
       position,
+      series,
     };
   }
 
   if (group === 'siirler') {
     if (format !== 'poem' || publicPath.length !== 2 || publicPath[0] !== 'siirler') {
       throw new Error(`${relativeFilePath}: siirler require a siirler/slug path and poem format.`);
+    }
+
+    if (series) {
+      throw new Error(`${relativeFilePath}: series entries require a positioned dialogue or story format.`);
     }
 
     return {
@@ -279,6 +300,10 @@ function loadWriting(relativeFilePath: string): WritingEntry {
 
   if (format !== 'article' || publicPath.length !== 1) {
     throw new Error(`${relativeFilePath}: konusmalar require a flat path and article format.`);
+  }
+
+  if (series) {
+    throw new Error(`${relativeFilePath}: series entries require a positioned dialogue or story format.`);
   }
 
   return {
@@ -327,16 +352,6 @@ function loadWritings(): WritingEntry[] {
   const publicPaths = new Set<string>();
 
   for (const entry of entries) {
-    if (entry.series) {
-      getWritingSeriesDefinition(entry.series);
-
-      if (!('position' in entry)) {
-        throw new Error(`${entry.path.join('/')}: series entries require a position.`);
-      }
-    }
-  }
-
-  for (const entry of entries) {
     const publicPath = entry.path.join('/');
 
     if (publicPaths.has(publicPath)) {
@@ -351,33 +366,9 @@ function loadWritings(): WritingEntry[] {
   return entries;
 }
 
-export const writings = loadWritings();
-
-export function getDialogueWritings(): DialogueWriting[] {
-  return writings
-    .filter((writing): writing is DialogueWriting => writing.group === 'denemeler')
-    .sort((first, second) => first.position - second.position);
-}
-
-export function getArticleWritings(): ArticleWriting[] {
-  return writings
-    .filter((writing): writing is ArticleWriting => writing.group === 'konusmalar')
-    .sort((first, second) => second.date.localeCompare(first.date));
-}
-
-export function getStoryWritings(): StoryWriting[] {
-  return writings
-    .filter((writing): writing is StoryWriting => writing.group === 'hikayeler')
-    .sort((first, second) => first.position - second.position);
-}
-
-export function getPoemWritings(): PoemWriting[] {
-  return writings
-    .filter((writing): writing is PoemWriting => writing.group === 'siirler')
-    .sort((first, second) => second.date.localeCompare(first.date));
-}
-
-export type WritingSeriesEntry = DialogueWriting | StoryWriting;
+export type WritingSeriesEntry =
+  | (DialogueWriting & { series: WritingSeriesSlug })
+  | (StoryWriting & { series: WritingSeriesSlug });
 
 export type WritingSeries = Readonly<
   WritingSeriesDefinition & {
@@ -385,37 +376,124 @@ export type WritingSeries = Readonly<
   }
 >;
 
-export function getWritingSeries(series: string): WritingSeries {
+function isWritingSeriesEntry(entry: WritingEntry): entry is WritingSeriesEntry {
+  return 'position' in entry && entry.series !== undefined;
+}
+
+type WritingIndex = {
+  all: WritingEntry[];
+  byPath: Map<string, WritingEntry>;
+  byGroup: {
+    denemeler: DialogueWriting[];
+    hikayeler: StoryWriting[];
+    konusmalar: ArticleWriting[];
+    siirler: PoemWriting[];
+  };
+  bySeries: Map<WritingSeriesSlug, WritingSeriesEntry[]>;
+};
+
+function comparePosition(first: { position: number }, second: { position: number }): number {
+  return first.position - second.position;
+}
+
+function compareDateDescending(first: { date: string }, second: { date: string }): number {
+  return second.date.localeCompare(first.date);
+}
+
+function buildWritingIndex(entries: WritingEntry[]): WritingIndex {
+  const byPath = new Map<string, WritingEntry>();
+  const bySeries = new Map<WritingSeriesSlug, WritingSeriesEntry[]>();
+  const byGroup: WritingIndex['byGroup'] = {
+    denemeler: [],
+    hikayeler: [],
+    konusmalar: [],
+    siirler: [],
+  };
+
+  for (const entry of entries) {
+    byPath.set(entry.path.join('/'), entry);
+
+    switch (entry.group) {
+      case 'denemeler':
+        byGroup.denemeler.push(entry);
+        break;
+      case 'hikayeler':
+        byGroup.hikayeler.push(entry);
+        break;
+      case 'konusmalar':
+        byGroup.konusmalar.push(entry);
+        break;
+      case 'siirler':
+        byGroup.siirler.push(entry);
+        break;
+    }
+
+    if (isWritingSeriesEntry(entry)) {
+      const seriesEntries = bySeries.get(entry.series) ?? [];
+
+      seriesEntries.push(entry);
+      bySeries.set(entry.series, seriesEntries);
+    }
+  }
+
+  byGroup.denemeler.sort(comparePosition);
+  byGroup.hikayeler.sort(comparePosition);
+  byGroup.konusmalar.sort(compareDateDescending);
+  byGroup.siirler.sort(compareDateDescending);
+
+  for (const seriesEntries of bySeries.values()) {
+    seriesEntries.sort(comparePosition);
+  }
+
+  return { all: entries, byPath, byGroup, bySeries };
+}
+
+const writingIndex = buildWritingIndex(loadWritings());
+
+export const writings = writingIndex.all;
+
+export function getDialogueWritings(): DialogueWriting[] {
+  return [...writingIndex.byGroup.denemeler];
+}
+
+export function getArticleWritings(): ArticleWriting[] {
+  return [...writingIndex.byGroup.konusmalar];
+}
+
+export function getStoryWritings(): StoryWriting[] {
+  return [...writingIndex.byGroup.hikayeler];
+}
+
+export function getPoemWritings(): PoemWriting[] {
+  return [...writingIndex.byGroup.siirler];
+}
+
+export function getWritingSeries(series: WritingSeriesSlug): WritingSeries {
   const definition = getWritingSeriesDefinition(series);
-  const entries = writings
-    .filter((writing): writing is WritingSeriesEntry => 'position' in writing && writing.series === series)
-    .sort((first, second) => first.position - second.position);
+  const entries = writingIndex.bySeries.get(series) ?? [];
 
   return {
     ...definition,
-    entries,
+    entries: [...entries],
   };
 }
 
-export function getWritingSeriesCatalog(): WritingSeries[] {
-  return Object.keys(writingSeriesDefinitions).map(getWritingSeries);
-}
-
-export function getSeriesNavigation(writing: WritingEntry): {
-  previous?: WritingSeriesEntry;
-  next?: WritingSeriesEntry;
+export type WritingNavigation = {
+  previous?: WritingEntry;
+  next?: WritingEntry;
   index?: number;
   total?: number;
-} {
-  if (!writing.series || !('position' in writing)) {
-    return {};
-  }
+  series?: Pick<WritingSeriesDefinition, 'slug' | 'title' | 'hubPath'>;
+};
 
-  const sequence = getWritingSeries(writing.series).entries;
+function getOrderedWritingNavigation(
+  sequence: readonly WritingEntry[],
+  writing: WritingEntry
+): Omit<WritingNavigation, 'series'> | undefined {
   const index = sequence.findIndex((entry) => entry.path.join('/') === writing.path.join('/'));
 
   if (index === -1) {
-    return {};
+    return undefined;
   }
 
   return {
@@ -427,34 +505,37 @@ export function getSeriesNavigation(writing: WritingEntry): {
 }
 
 export function getWritingByPath(pathSegments: string[]): WritingEntry | undefined {
-  return writings.find(
-    (writing) =>
-      writing.path.length === pathSegments.length &&
-      writing.path.every((segment, index) => segment === pathSegments[index])
-  );
+  return writingIndex.byPath.get(pathSegments.join('/'));
 }
 
 export function getWritingLastModified(writing: WritingEntry): string {
   return writing.updatedAt ?? writing.siteAddedAt;
 }
 
-export function getWritingNavigation(writing: WritingEntry): {
-  previous?: WritingEntry;
-  next?: WritingEntry;
-} {
+export function getWritingNavigation(writing: WritingEntry): WritingNavigation {
+  if (writing.series) {
+    const series = getWritingSeries(writing.series);
+    const navigation = getOrderedWritingNavigation(series.entries, writing);
+
+    if (!navigation) {
+      return {};
+    }
+
+    return {
+      ...navigation,
+      series: {
+        slug: series.slug,
+        title: series.title,
+        hubPath: series.hubPath,
+      },
+    };
+  }
+
   if (writing.group !== 'denemeler' && writing.group !== 'hikayeler') {
     return {};
   }
 
-  const sequence = writing.group === 'denemeler' ? getDialogueWritings() : getStoryWritings();
-  const index = sequence.findIndex((entry) => entry.path.join('/') === writing.path.join('/'));
+  const sequence = writing.group === 'denemeler' ? writingIndex.byGroup.denemeler : writingIndex.byGroup.hikayeler;
 
-  if (index === -1) {
-    return {};
-  }
-
-  return {
-    previous: sequence[index - 1],
-    next: sequence[index + 1],
-  };
+  return getOrderedWritingNavigation(sequence, writing) ?? {};
 }

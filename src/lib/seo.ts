@@ -2,11 +2,9 @@ import type { Project } from '@/data/projects';
 import {
   getWritingSection,
   getWritingSeries,
-  getWritingSeriesCatalog,
   getWritingTypeLabel,
   type WritingEntry,
   type WritingSeries,
-  type WritingSeriesEntry,
 } from '@/lib/writing/registry';
 
 export const siteUrl = 'https://mertercan.com';
@@ -231,10 +229,35 @@ function getWritingSeriesJsonLdIds(series: Pick<WritingSeries, 'hubPath'>): Writ
   };
 }
 
-function buildWritingSeriesNode(series: WritingSeries): JsonLdNode {
-  const ids = getWritingSeriesJsonLdIds(series);
+type WritingSeriesJsonLdProjection = {
+  ids: WritingSeriesJsonLdIds;
+  itemsNode: JsonLdNode;
+  seriesNode: JsonLdNode;
+};
 
-  return {
+function buildWritingSeriesProjection(series: WritingSeries): WritingSeriesJsonLdProjection {
+  const ids = getWritingSeriesJsonLdIds(series);
+  const foreignEntry = series.entries.find((writing) => writing.series !== series.slug);
+
+  if (foreignEntry) {
+    throw new Error(`Writing entry does not belong to series ${series.slug}: ${foreignEntry.path.join('/')}`);
+  }
+
+  const itemsNode: JsonLdNode = {
+    '@type': 'ItemList',
+    '@id': ids.items,
+    name: series.title,
+    numberOfItems: series.entries.length,
+    itemListOrder: 'https://schema.org/ItemListOrderAscending',
+    itemListElement: series.entries.map((writing) => ({
+      '@type': 'ListItem',
+      position: writing.position,
+      name: writing.title,
+      url: getWritingEntryUrl(writing),
+    })),
+  };
+
+  const seriesNode: JsonLdNode = {
     '@type': 'CreativeWorkSeries',
     '@id': ids.series,
     name: series.title,
@@ -251,20 +274,25 @@ function buildWritingSeriesNode(series: WritingSeries): JsonLdNode {
       '@id': getWritingEntryJsonLdId(writing),
     })),
   };
+
+  return {
+    ids,
+    itemsNode,
+    seriesNode,
+  };
 }
 
-export function buildWritingJsonLd(
-  entries: WritingEntry[],
-  description: string
-): { '@context': string; '@graph': JsonLdNode[] } {
+export function buildWritingJsonLd({
+  entries,
+  description,
+  series,
+}: {
+  entries: WritingEntry[];
+  description: string;
+  series: WritingSeries[];
+}): { '@context': string; '@graph': JsonLdNode[] } {
   const itemListId = `${siteUrl}/writing#items`;
-  const seriesNodes = getWritingSeriesCatalog().flatMap((series) => {
-    const seriesEntries = entries
-      .filter((writing): writing is WritingSeriesEntry => 'position' in writing && writing.series === series.slug)
-      .sort((first, second) => first.position - second.position);
-
-    return seriesEntries.length > 0 ? [buildWritingSeriesNode({ ...series, entries: seriesEntries })] : [];
-  });
+  const seriesNodes = series.map((writingSeries) => buildWritingSeriesProjection(writingSeries).seriesNode);
 
   return {
     '@context': 'https://schema.org',
@@ -308,24 +336,19 @@ export function buildWritingJsonLd(
 }
 
 export function buildWritingSeriesJsonLd(series: WritingSeries): { '@context': string; '@graph': JsonLdNode[] } {
-  const ids = getWritingSeriesJsonLdIds(series);
-  const foreignEntry = series.entries.find((writing) => writing.series !== series.slug);
-
-  if (foreignEntry) {
-    throw new Error(`Writing entry does not belong to series ${series.slug}: ${foreignEntry.path.join('/')}`);
-  }
+  const projection = buildWritingSeriesProjection(series);
 
   return {
     '@context': 'https://schema.org',
     '@graph': [
       buildBreadcrumbJsonLd([
         { name: 'Home', url: siteUrl },
-        { name: series.title, url: ids.url },
+        { name: series.title, url: projection.ids.url },
       ]),
       {
         '@type': 'CollectionPage',
-        '@id': ids.page,
-        url: ids.url,
+        '@id': projection.ids.page,
+        url: projection.ids.url,
         name: series.title,
         description: series.description,
         inLanguage: series.inLanguage,
@@ -336,26 +359,14 @@ export function buildWritingSeriesJsonLd(series: WritingSeries): { '@context': s
           '@id': personId,
         },
         about: {
-          '@id': ids.series,
+          '@id': projection.ids.series,
         },
         mainEntity: {
-          '@id': ids.items,
+          '@id': projection.ids.items,
         },
       },
-      {
-        '@type': 'ItemList',
-        '@id': ids.items,
-        name: series.title,
-        numberOfItems: series.entries.length,
-        itemListOrder: 'https://schema.org/ItemListOrderAscending',
-        itemListElement: series.entries.map((writing) => ({
-          '@type': 'ListItem',
-          position: writing.position,
-          name: writing.title,
-          url: getWritingEntryUrl(writing),
-        })),
-      },
-      buildWritingSeriesNode(series),
+      projection.itemsNode,
+      projection.seriesNode,
     ],
   };
 }

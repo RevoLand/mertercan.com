@@ -2,8 +2,10 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/app/components/Footer';
 import { siteName, siteUrl } from '@/lib/seo';
+import { getWritingSeries } from '@/lib/writing/registry';
 
 const description = 'A quiet record of how this site — and I — grow.';
+const arenaSeries = getWritingSeries('arena');
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -77,7 +79,7 @@ const entries: Entry[] = [
       },
       {
         text: 'Arena began with two short stories written years apart.',
-        relatedLink: { href: '/writing#arena', label: 'Arena' },
+        relatedLink: { href: arenaSeries.hubPath, label: arenaSeries.title },
       },
       {
         text: 'Arena continued with a third story about a king questioning the role he was given and the judgment expected of him.',

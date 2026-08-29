@@ -3,9 +3,10 @@ import Footer from '@/app/components/Footer';
 import Hero from '@/app/components/Hero';
 import Section from '@/app/components/Section';
 import { buildHomeJsonLd } from '@/lib/seo';
-import { getWritingByPath } from '@/lib/writing/registry';
+import { getWritingByPath, getWritingSeries } from '@/lib/writing/registry';
 
 const jsonLd = buildHomeJsonLd();
+const arenaSeries = getWritingSeries('arena');
 
 const selectedWritings = [
   ['siirler', 'tedbir'],
@@ -88,11 +89,11 @@ export default function Home() {
             </h3>
             <article>
               <h4 className='text-ink mb-1.5 text-[1.125rem] leading-snug font-medium tracking-tight md:text-[1.25rem]'>
-                <Link href='/arena' className='text-ink hover:text-ink/70 no-underline'>
-                  Arena
+                <Link href={arenaSeries.hubPath} className='text-ink hover:text-ink/70 no-underline'>
+                  {arenaSeries.title}
                 </Link>
               </h4>
-              <p className='text-ink/70 mt-0! text-sm!'>Birbirini yıllar sonra bulan kısa hikâyeler.</p>
+              <p className='text-ink/70 mt-0! text-sm!'>{arenaSeries.description}</p>
             </article>
           </section>
 
