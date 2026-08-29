@@ -7,6 +7,7 @@ description: "Açılmak, güvenmek, yaralanmak, sorumlulukları ayırmak ve sağ
 seoDescription: "İlişkilerde açılmak, güvenmek ve yaralanmak üzerinden sorumluluğun sınırlarını; anlaşılabilir olmayı ve güvenme cesaretini tartışan diyalog."
 group: "denemeler"
 format: "dialogue"
+series: "denemeler"
 position: 7
 ---
 

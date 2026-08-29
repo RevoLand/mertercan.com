@@ -25,9 +25,17 @@ const writingSeriesDefinitions: Record<string, WritingSeriesDefinition> = {
     hubPath: '/arena',
     inLanguage: 'tr',
   },
+  denemeler: {
+    slug: 'denemeler',
+    title: 'Denemeler',
+    description:
+      'Bu serinin ilk beş denemesini yazarlığa giriş eğitimleri sırasında karaladım: düşünce, ölüm, özgecilik, insan doğası ve dostluk. Zamanla bunlara anlaşılmak, güvenmek, sorumluluk, sağlıklı sınırlar ve öznellik üzerine dört yeni diyalog eklendi.',
+    hubPath: '/writing#denemeler',
+    inLanguage: 'tr',
+  },
 };
 
-export function getWritingSeriesDefinition(series: string): WritingSeriesDefinition {
+function getWritingSeriesDefinition(series: string): WritingSeriesDefinition {
   const definition = writingSeriesDefinitions[series];
 
   if (!Object.prototype.hasOwnProperty.call(writingSeriesDefinitions, series) || !definition) {
@@ -281,6 +289,36 @@ function loadWriting(relativeFilePath: string): WritingEntry {
   };
 }
 
+type PositionedWriting = DialogueWriting | StoryWriting;
+
+function getWritingPositionScope(writing: PositionedWriting): string {
+  return writing.series ? `series:${writing.series}` : `group:${writing.group}`;
+}
+
+export function validateWritingPositionScopes(entries: WritingEntry[]): void {
+  const positionsByScope = new Map<string, Map<number, string>>();
+
+  for (const entry of entries) {
+    if (!('position' in entry)) {
+      continue;
+    }
+
+    const writing = entry as PositionedWriting;
+    const scope = getWritingPositionScope(writing);
+    const positions = positionsByScope.get(scope) ?? new Map<number, string>();
+    const previousPath = positions.get(writing.position);
+
+    if (previousPath) {
+      throw new Error(
+        `${writing.path.join('/')}: position ${writing.position} duplicates ${previousPath} in ${scope}.`
+      );
+    }
+
+    positions.set(writing.position, writing.path.join('/'));
+    positionsByScope.set(scope, positions);
+  }
+}
+
 function loadWritings(): WritingEntry[] {
   const markdownFiles = readdirSync(contentDirectory, { recursive: true, encoding: 'utf8' })
     .filter((filePath) => filePath.endsWith('.md'))
@@ -291,6 +329,10 @@ function loadWritings(): WritingEntry[] {
   for (const entry of entries) {
     if (entry.series) {
       getWritingSeriesDefinition(entry.series);
+
+      if (!('position' in entry)) {
+        throw new Error(`${entry.path.join('/')}: series entries require a position.`);
+      }
     }
   }
 
@@ -304,27 +346,7 @@ function loadWritings(): WritingEntry[] {
     publicPaths.add(publicPath);
   }
 
-  const dialoguePositions = entries
-    .filter((entry): entry is DialogueWriting => entry.group === 'denemeler')
-    .map((entry) => entry.position)
-    .sort((first, second) => first - second);
-
-  dialoguePositions.forEach((position, index) => {
-    if (position !== index + 1) {
-      throw new Error('Denemeler positions must form a contiguous sequence starting at 1.');
-    }
-  });
-
-  const storyPositions = entries
-    .filter((entry): entry is StoryWriting => entry.group === 'hikayeler')
-    .map((entry) => entry.position)
-    .sort((first, second) => first - second);
-
-  storyPositions.forEach((position, index) => {
-    if (position !== index + 1) {
-      throw new Error('Hikayeler positions must form a contiguous sequence starting at 1.');
-    }
-  });
+  validateWritingPositionScopes(entries);
 
   return entries;
 }
@@ -357,10 +379,26 @@ export function getPoemWritings(): PoemWriting[] {
 
 export type WritingSeriesEntry = DialogueWriting | StoryWriting;
 
-export function getWritingSeries(series: string): WritingSeriesEntry[] {
-  return writings
+export type WritingSeries = Readonly<
+  WritingSeriesDefinition & {
+    entries: readonly WritingSeriesEntry[];
+  }
+>;
+
+export function getWritingSeries(series: string): WritingSeries {
+  const definition = getWritingSeriesDefinition(series);
+  const entries = writings
     .filter((writing): writing is WritingSeriesEntry => 'position' in writing && writing.series === series)
     .sort((first, second) => first.position - second.position);
+
+  return {
+    ...definition,
+    entries,
+  };
+}
+
+export function getWritingSeriesCatalog(): WritingSeries[] {
+  return Object.keys(writingSeriesDefinitions).map(getWritingSeries);
 }
 
 export function getSeriesNavigation(writing: WritingEntry): {
@@ -373,7 +411,7 @@ export function getSeriesNavigation(writing: WritingEntry): {
     return {};
   }
 
-  const sequence = getWritingSeries(writing.series);
+  const sequence = getWritingSeries(writing.series).entries;
   const index = sequence.findIndex((entry) => entry.path.join('/') === writing.path.join('/'));
 
   if (index === -1) {

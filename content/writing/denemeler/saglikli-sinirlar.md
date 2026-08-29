@@ -7,6 +7,7 @@ description: "Sağlıklı sınırlar, yakınlık, öznellik ve kendimize ayrıla
 seoDescription: "Sağlıklı sınırları yakınlık, öznellik ve kendini koruma üzerinden ele alan; başkasını kontrol etmekle kendi kararını ayıran felsefi diyalog."
 group: "denemeler"
 format: "dialogue"
+series: "denemeler"
 position: 8
 ---
 

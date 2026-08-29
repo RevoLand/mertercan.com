@@ -7,6 +7,7 @@ description: "Ikigai, fark edilmek, almayı öğrenmek ve insanı iyileştiren i
 seoDescription: "İnsan doğasını ikigai, fark edilme, sevgi, yardım istemek ve iyileştirici ilişkiler üzerinden düşünen kısa bir felsefi diyalog."
 group: "denemeler"
 format: "dialogue"
+series: "denemeler"
 position: 4
 ---
 

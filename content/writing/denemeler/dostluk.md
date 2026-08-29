@@ -7,6 +7,7 @@ description: "Gerçek dostluğun sadece iyi hissettirmek değil, bazen büyütme
 seoDescription: "Gerçek dostluğun iyilikten fazlası olduğunu; erdem, saygı, zorlamak, büyütmek ve yanında durmak üzerinden tartışan felsefi bir diyalog."
 group: "denemeler"
 format: "dialogue"
+series: "denemeler"
 position: 5
 ---
 

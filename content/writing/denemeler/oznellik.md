@@ -7,6 +7,7 @@ description: "Geçmişi doğru adıyla tutmak, kendi tanıklığını korumak ve
 seoDescription: "Öznelliği geçmiş, tanıklık, adalet ve kişinin kendi hikâyesinde yeniden özne olması üzerinden ele alan felsefi bir diyalog."
 group: "denemeler"
 format: "dialogue"
+series: "denemeler"
 position: 9
 ---
 

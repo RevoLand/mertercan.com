@@ -7,6 +7,7 @@ description: "Ölüm fikrinin insanı nasıl esirgeyebildiği; yaratmak, hizmet 
 seoDescription: "Ölüm fikrinin pişmanlık ve kaygıyı nasıl dönüştürebileceği; yaratmak, hizmet etmek ve kendini gerçekleştirmek üzerine felsefi bir diyalog."
 group: "denemeler"
 format: "dialogue"
+series: "denemeler"
 position: 2
 ---
 

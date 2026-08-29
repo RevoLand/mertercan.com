@@ -7,6 +7,7 @@ description: "Anlaşılmak, duvarları indirmek, niyet ile etki arasındaki fark
 seoDescription: "Dostlukta anlaşılmak, duvarları indirmek, niyet ile etkiyi ayırmak ve bozulanı birlikte onarmak üzerine bir diyalog."
 group: "denemeler"
 format: "dialogue"
+series: "denemeler"
 position: 6
 ---
 

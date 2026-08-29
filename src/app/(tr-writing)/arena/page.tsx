@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/app/components/Footer';
-import { getWritingSeries, getWritingSeriesDefinition } from '@/lib/writing/registry';
+import { getWritingSeries } from '@/lib/writing/registry';
 import { buildWritingSeriesJsonLd, siteName, siteUrl } from '@/lib/seo';
 
-const arenaSeries = getWritingSeriesDefinition('arena');
-const arenaStories = getWritingSeries(arenaSeries.slug);
-const arenaJsonLd = buildWritingSeriesJsonLd(arenaSeries, arenaStories);
+const arenaSeries = getWritingSeries('arena');
+const arenaStories = arenaSeries.entries;
+const arenaJsonLd = buildWritingSeriesJsonLd(arenaSeries);
 
 type ArenaStory = (typeof arenaStories)[number];
 

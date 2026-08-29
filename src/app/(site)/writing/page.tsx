@@ -5,7 +5,6 @@ import WritingSectionNav from '@/app/components/WritingSectionNav';
 import { buildWritingJsonLd, siteName, siteUrl } from '@/lib/seo';
 import {
   getArticleWritings,
-  getDialogueWritings,
   getPoemWritings,
   getStoryWritings,
   getWritingKicker,
@@ -14,12 +13,12 @@ import {
 
 const description =
   'Notes, poems, essays, stories, and small conversations I want to keep somewhere quieter than the feed.';
-const essays = getDialogueWritings();
 const stories = getStoryWritings();
-const arenaStories = getWritingSeries('arena');
+const arenaSeries = getWritingSeries('arena');
+const denemelerSeries = getWritingSeries('denemeler');
 const poems = getPoemWritings();
 const talks = getArticleWritings();
-const writingJsonLd = buildWritingJsonLd([...essays, ...stories, ...poems, ...talks], description);
+const writingJsonLd = buildWritingJsonLd([...denemelerSeries.entries, ...stories, ...poems, ...talks], description);
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -70,13 +69,11 @@ export default function Writing() {
             Denemeler
           </h2>
           <p lang='tr' className='text-ink/70 mb-12 max-w-[58ch] md:mb-14'>
-            Bu serinin ilk beş denemesini yazarlığa giriş eğitimleri sırasında karaladım: düşünce, ölüm, özgecilik,
-            insan doğası ve dostluk. Zamanla bunlara anlaşılmak, güvenmek, sorumluluk, sağlıklı sınırlar ve öznellik
-            üzerine dört yeni diyalog eklendi.
+            {denemelerSeries.description}
           </p>
 
           <div className='space-y-7 md:space-y-8'>
-            {essays.map((essay) => (
+            {denemelerSeries.entries.map((essay) => (
               <article key={essay.slug}>
                 <p className='text-ink/70! mb-1.5 text-sm!'>
                   {getWritingKicker(essay)} · <time dateTime={essay.date}>{essay.displayDate}</time>
@@ -106,7 +103,7 @@ export default function Writing() {
           <p className='text-ink/70 mb-10 max-w-[58ch]'>Birbirini yıllar sonra bulan kısa hikâyeler.</p>
 
           <div className='space-y-7 md:space-y-8'>
-            {arenaStories.map((story) => (
+            {arenaSeries.entries.map((story) => (
               <article key={story.slug}>
                 <p className='text-ink/70! mb-1.5 text-sm!'>
                   {getWritingKicker(story)} · <time dateTime={story.date}>{story.displayDate}</time>

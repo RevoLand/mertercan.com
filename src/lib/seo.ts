@@ -1,10 +1,11 @@
 import type { Project } from '@/data/projects';
 import {
   getWritingSection,
-  getWritingSeriesDefinition,
+  getWritingSeries,
+  getWritingSeriesCatalog,
   getWritingTypeLabel,
   type WritingEntry,
-  type WritingSeriesDefinition,
+  type WritingSeries,
   type WritingSeriesEntry,
 } from '@/lib/writing/registry';
 
@@ -215,14 +216,40 @@ type WritingSeriesJsonLdIds = {
   series: string;
 };
 
-function getWritingSeriesJsonLdIds(definition: WritingSeriesDefinition): WritingSeriesJsonLdIds {
-  const url = `${siteUrl}${definition.hubPath}`;
+function getWritingSeriesJsonLdIds(series: Pick<WritingSeries, 'hubPath'>): WritingSeriesJsonLdIds {
+  const url = `${siteUrl}${series.hubPath}`;
+  const hubUrl = new URL(url);
+  const fragment = hubUrl.hash.slice(1);
+  const getScopedId = (suffix: string) =>
+    fragment ? `${hubUrl.origin}${hubUrl.pathname}#${fragment}-${suffix}` : `${url}#${suffix}`;
 
   return {
     url,
-    page: `${url}#page`,
-    items: `${url}#items`,
-    series: `${url}#series`,
+    page: getScopedId('page'),
+    items: getScopedId('items'),
+    series: getScopedId('series'),
+  };
+}
+
+function buildWritingSeriesNode(series: WritingSeries): JsonLdNode {
+  const ids = getWritingSeriesJsonLdIds(series);
+
+  return {
+    '@type': 'CreativeWorkSeries',
+    '@id': ids.series,
+    name: series.title,
+    url: ids.url,
+    description: series.description,
+    inLanguage: series.inLanguage,
+    author: {
+      '@id': personId,
+    },
+    isPartOf: {
+      '@id': `${siteUrl}/writing#page`,
+    },
+    hasPart: series.entries.map((writing) => ({
+      '@id': getWritingEntryJsonLdId(writing),
+    })),
   };
 }
 
@@ -231,6 +258,13 @@ export function buildWritingJsonLd(
   description: string
 ): { '@context': string; '@graph': JsonLdNode[] } {
   const itemListId = `${siteUrl}/writing#items`;
+  const seriesNodes = getWritingSeriesCatalog().flatMap((series) => {
+    const seriesEntries = entries
+      .filter((writing): writing is WritingSeriesEntry => 'position' in writing && writing.series === series.slug)
+      .sort((first, second) => first.position - second.position);
+
+    return seriesEntries.length > 0 ? [buildWritingSeriesNode({ ...series, entries: seriesEntries })] : [];
+  });
 
   return {
     '@context': 'https://schema.org',
@@ -268,19 +302,17 @@ export function buildWritingJsonLd(
           url: getWritingEntryUrl(writing),
         })),
       },
+      ...seriesNodes,
     ],
   };
 }
 
-export function buildWritingSeriesJsonLd(
-  definition: WritingSeriesDefinition,
-  entries: WritingSeriesEntry[]
-): { '@context': string; '@graph': JsonLdNode[] } {
-  const ids = getWritingSeriesJsonLdIds(definition);
-  const foreignEntry = entries.find((writing) => writing.series !== definition.slug);
+export function buildWritingSeriesJsonLd(series: WritingSeries): { '@context': string; '@graph': JsonLdNode[] } {
+  const ids = getWritingSeriesJsonLdIds(series);
+  const foreignEntry = series.entries.find((writing) => writing.series !== series.slug);
 
   if (foreignEntry) {
-    throw new Error(`Writing entry does not belong to series ${definition.slug}: ${foreignEntry.path.join('/')}`);
+    throw new Error(`Writing entry does not belong to series ${series.slug}: ${foreignEntry.path.join('/')}`);
   }
 
   return {
@@ -288,15 +320,15 @@ export function buildWritingSeriesJsonLd(
     '@graph': [
       buildBreadcrumbJsonLd([
         { name: 'Home', url: siteUrl },
-        { name: definition.title, url: ids.url },
+        { name: series.title, url: ids.url },
       ]),
       {
         '@type': 'CollectionPage',
         '@id': ids.page,
         url: ids.url,
-        name: definition.title,
-        description: definition.description,
-        inLanguage: definition.inLanguage,
+        name: series.title,
+        description: series.description,
+        inLanguage: series.inLanguage,
         isPartOf: {
           '@id': websiteId,
         },
@@ -313,30 +345,17 @@ export function buildWritingSeriesJsonLd(
       {
         '@type': 'ItemList',
         '@id': ids.items,
-        name: definition.title,
-        numberOfItems: entries.length,
+        name: series.title,
+        numberOfItems: series.entries.length,
         itemListOrder: 'https://schema.org/ItemListOrderAscending',
-        itemListElement: entries.map((writing) => ({
+        itemListElement: series.entries.map((writing) => ({
           '@type': 'ListItem',
           position: writing.position,
           name: writing.title,
           url: getWritingEntryUrl(writing),
         })),
       },
-      {
-        '@type': 'CreativeWorkSeries',
-        '@id': ids.series,
-        name: definition.title,
-        url: ids.url,
-        description: definition.description,
-        inLanguage: definition.inLanguage,
-        author: {
-          '@id': personId,
-        },
-        hasPart: entries.map((writing) => ({
-          '@id': getWritingEntryJsonLdId(writing),
-        })),
-      },
+      buildWritingSeriesNode(series),
     ],
   };
 }
@@ -352,9 +371,9 @@ export function getWritingMetadataTitle(writing: Pick<WritingEntry, 'group' | 't
 export function buildWritingEntryJsonLd(writing: WritingEntry): { '@context': string; '@graph': JsonLdNode[] } {
   const writingUrl = getWritingEntryUrl(writing);
   const writingNodeId = getWritingEntryJsonLdId(writing);
-  const seriesDefinition = writing.series ? getWritingSeriesDefinition(writing.series) : undefined;
+  const series = writing.series ? getWritingSeries(writing.series) : undefined;
   const writingCollection = { '@id': `${siteUrl}/writing#page` };
-  const seriesMembership = seriesDefinition ? { '@id': getWritingSeriesJsonLdIds(seriesDefinition).series } : undefined;
+  const seriesMembership = series ? { '@id': getWritingSeriesJsonLdIds(series).series } : undefined;
   const writingNode: JsonLdNode = {
     '@type': writing.format === 'poem' ? 'CreativeWork' : 'Article',
     '@id': writingNodeId,

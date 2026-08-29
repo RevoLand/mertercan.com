@@ -7,6 +7,7 @@ description: "Bir düşüncenin nerede başladığı, neye dönüşebileceği ve
 seoDescription: "Düşünce, yaratım ve eylem arasındaki ilişkiyi; bir fikrin ne zaman dönüşüme, ne zaman hareketsizliğe dönüştüğünü tartışan kısa bir diyalog."
 group: "denemeler"
 format: "dialogue"
+series: "denemeler"
 position: 1
 ---
 

@@ -7,6 +7,7 @@ description: "Vermek, kullanılmak, ego, saf özgecilik ihtimali ve insanın ken
 seoDescription: "Özgecilik, yardım etmek ve kullanılmak arasındaki gerilimi; ego, karşılık ve saf özgecilik ihtimalini tartışan felsefi bir diyalog."
 group: "denemeler"
 format: "dialogue"
+series: "denemeler"
 position: 3
 ---
 
