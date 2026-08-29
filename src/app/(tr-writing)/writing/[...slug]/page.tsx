@@ -62,7 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale: 'tr_TR',
       type: 'article',
       section: getWritingSection(writing),
-      publishedTime: writing.date,
+      publishedTime: writing.siteAddedAt,
       images: [
         {
           url: '/opengraph-image',
