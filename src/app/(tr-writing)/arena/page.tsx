@@ -31,6 +31,9 @@ export const metadata: Metadata = {
   description: arenaSeries.description,
   alternates: {
     canonical: arenaSeries.hubPath,
+    types: {
+      'application/rss+xml': `${arenaSeries.hubPath}/feed.xml`,
+    },
   },
   openGraph: {
     title: `${arenaSeries.title} — ${siteName}`,
