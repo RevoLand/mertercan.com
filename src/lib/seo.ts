@@ -385,6 +385,12 @@ export function buildWritingEntryJsonLd(writing: WritingEntry): { '@context': st
   const series = writing.series ? getWritingSeries(writing.series) : undefined;
   const writingCollection = { '@id': `${siteUrl}/writing#page` };
   const seriesMembership = series ? { '@id': getWritingSeriesJsonLdIds(series).series } : undefined;
+  const person = {
+    '@type': 'Person',
+    '@id': personId,
+    name: siteName,
+    url: `${siteUrl}/`,
+  };
   const writingNode: JsonLdNode = {
     '@type': writing.format === 'poem' ? 'CreativeWork' : 'Article',
     '@id': writingNodeId,
@@ -395,12 +401,8 @@ export function buildWritingEntryJsonLd(writing: WritingEntry): { '@context': st
     inLanguage: 'tr',
     datePublished: writing.date,
     image: `${siteUrl}/opengraph-image`,
-    author: {
-      '@id': personId,
-    },
-    publisher: {
-      '@id': personId,
-    },
+    author: person,
+    publisher: person,
     isPartOf: seriesMembership ? [writingCollection, seriesMembership] : writingCollection,
     mainEntityOfPage: {
       '@id': writingUrl,
