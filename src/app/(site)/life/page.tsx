@@ -102,6 +102,10 @@ const entries: Entry[] = [
         relatedLink: { href: '/writing/hikayeler/arena-vii-soru', label: 'Arena VII — Soru' },
       },
       {
+        text: 'Arena continued with an eighth story about a mother caught between an urgent journey and her son’s wish to play one more time.',
+        relatedLink: { href: '/writing/hikayeler/arena-viii-bir-kere-daha', label: 'Arena VIII — Bir Kere Daha' },
+      },
+      {
         text: "Added the leadership talk I presented on stage at the end of 2025, connecting Irvin Yalom's existential approach with leading oneself.",
         relatedLink: {
           href: '/writing/liderlik-yalom-ve-kendine-liderlik-etmek',
