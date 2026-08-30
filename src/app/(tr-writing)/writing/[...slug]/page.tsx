@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Footer from '@/app/components/Footer';
+import WritingShare from '@/app/components/WritingShare';
 import {
   buildWritingEntryJsonLd,
   getWritingEntryUrl,
@@ -17,6 +18,7 @@ import {
   getWritingSection,
   writings,
 } from '@/lib/writing/registry';
+import { buildWritingShareLinks } from '@/lib/writing/share';
 
 type Props = {
   params: Promise<{ slug: string[] }>;
@@ -91,8 +93,17 @@ export default async function WritingEntryPage({ params }: Props) {
   }
 
   const writingJsonLd = buildWritingEntryJsonLd(writing);
+  const writingUrl = getWritingEntryUrl(writing);
   const navigation = getWritingNavigation(writing);
   const isSeriesEntry = Boolean(writing.series);
+  const writingShareSeries =
+    'position' in writing && writing.series ? { slug: writing.series, position: writing.position } : undefined;
+  const writingShareLinks = buildWritingShareLinks({
+    canonicalUrl: writingUrl,
+    title: writing.title,
+    slug: writing.slug,
+    series: writingShareSeries,
+  });
 
   return (
     <main className='min-h-screen'>
@@ -185,6 +196,10 @@ export default async function WritingEntryPage({ params }: Props) {
                 </nav>
               </div>
             )}
+
+        <div data-nosnippet='' className='mt-6 flex max-w-[680px] justify-start md:mt-8 md:justify-end'>
+          <WritingShare title={writing.title} links={writingShareLinks} />
+        </div>
       </article>
 
       <Footer />
