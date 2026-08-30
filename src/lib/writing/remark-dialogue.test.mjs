@@ -17,6 +17,16 @@ test('renders consecutive story dialogue lines as separate paragraphs', () => {
   assert.equal(renderStory(source), '<p>- "Birinci replik."</p>\n<p>- "İkinci replik."</p>\n');
 });
 
+test('renders dialogue lines with speaker attribution as separate paragraphs', () => {
+  const source = `\\- "Birinci replik," diye sordu kadın.
+\\- "İkinci replik," dedi adam.`;
+
+  assert.equal(
+    renderStory(source),
+    '<p>- "Birinci replik," diye sordu kadın.</p>\n<p>- "İkinci replik," dedi adam.</p>\n'
+  );
+});
+
 test('keeps narrative and dialogue as separate blocks when they share a markdown paragraph', () => {
   const source = `Karşısındakine döndü:
 \\- "Burada ne işin var?"
