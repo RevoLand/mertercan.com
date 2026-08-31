@@ -110,6 +110,10 @@ const entries: Entry[] = [
         relatedLink: { href: '/writing/hikayeler/arena-ix-gece', label: 'Arena IX — Gece' },
       },
       {
+        text: 'Arena continued with a tenth story about a woman questioning why she wants what the masked crowd wants.',
+        relatedLink: { href: '/writing/hikayeler/arena-x-seyirci', label: 'Arena X — Seyirci' },
+      },
+      {
         text: "Added the leadership talk I presented on stage at the end of 2025, connecting Irvin Yalom's existential approach with leading oneself.",
         relatedLink: {
           href: '/writing/liderlik-yalom-ve-kendine-liderlik-etmek',
