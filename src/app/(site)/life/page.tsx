@@ -114,6 +114,10 @@ const entries: Entry[] = [
         relatedLink: { href: '/writing/hikayeler/arena-x-seyirci', label: 'Arena X — Seyirci' },
       },
       {
+        text: 'Arena continued with an eleventh story about a man questioning the role of being everyone’s rescuer and letting the team find its own solution.',
+        relatedLink: { href: '/writing/hikayeler/arena-xi-gorev', label: 'Arena XI — Görev' },
+      },
+      {
         text: "Added the leadership talk I presented on stage at the end of 2025, connecting Irvin Yalom's existential approach with leading oneself.",
         relatedLink: {
           href: '/writing/liderlik-yalom-ve-kendine-liderlik-etmek',
