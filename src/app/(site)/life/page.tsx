@@ -56,6 +56,16 @@ type LifeNote = {
 
 const entries: Entry[] = [
   {
+    date: 'September 2026',
+    dateTime: '2026-09',
+    notes: [
+      {
+        text: 'Arena continued with a twelfth story about a man questioning the relationship between justice, friendship, and responsibility.',
+        relatedLink: { href: '/writing/hikayeler/arena-xii-gerekce', label: 'Arena XII — Gerekçe' },
+      },
+    ],
+  },
+  {
     date: 'August 2026',
     dateTime: '2026-08',
     intro:
