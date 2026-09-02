@@ -63,6 +63,10 @@ const entries: Entry[] = [
         text: 'Arena continued with a twelfth story about a man questioning the relationship between justice, friendship, and responsibility.',
         relatedLink: { href: '/writing/hikayeler/arena-xii-gerekce', label: 'Arena XII — Gerekçe' },
       },
+      {
+        text: 'Arena continued with a thirteenth story about a man finding the first step toward a new routine and a new acquaintance in a small café.',
+        relatedLink: { href: '/writing/hikayeler/arena-xiii-mudavim', label: 'Arena XIII — Müdavim' },
+      },
     ],
   },
   {
