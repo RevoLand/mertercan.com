@@ -67,6 +67,10 @@ const entries: Entry[] = [
         text: 'Arena continued with a thirteenth story about a man finding the first step toward a new routine and a new acquaintance in a small café.',
         relatedLink: { href: '/writing/hikayeler/arena-xiii-mudavim', label: 'Arena XIII — Müdavim' },
       },
+      {
+        text: 'Arena continued with a fourteenth story about a mother trapped in a silent house after the routine she trusted is disrupted.',
+        relatedLink: { href: '/writing/hikayeler/arena-xiv-yokluk', label: 'Arena XIV — Yokluk' },
+      },
     ],
   },
   {
