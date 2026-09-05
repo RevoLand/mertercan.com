@@ -71,6 +71,10 @@ const entries: Entry[] = [
         text: 'Arena continued with a fourteenth story about a mother trapped in a silent house after the routine she trusted is disrupted.',
         relatedLink: { href: '/writing/hikayeler/arena-xiv-yokluk', label: 'Arena XIV — Yokluk' },
       },
+      {
+        text: 'Arena continued with a fifteenth story about a therapist tracing the questions she asks her client back to her own attention and role.',
+        relatedLink: { href: '/writing/hikayeler/arena-xv-iz', label: 'Arena XV — İz' },
+      },
     ],
   },
   {
