@@ -11,8 +11,34 @@ series: "arena"
 position: 5
 ---
 
-Kadın bir anlığına gözlerini kapatabilmiş ve birkaç dakika da olsa uyuyabilmişti. Gözlerini açtığında yine aynı yerde olduğunu gördü. O steril hastane kokusu ve kulağına ritmik bir şekilde gelen monitör sesi. Döndü ve eşine baktı. Hâlâ tepkisizce yatıyordu. "En azından birimiz dinlenebiliyoruz" diye düşündü ve bir anlığına tebessüm etti. Bacaklarını biraz hareket ettirmek için yavaşça ayağa kalktı ve ağır adımlarla pencereye doğru gitti. Pencereden dışarı baktığında, dün geceki yağmurun aralıksız bir şekilde devam ettiğini gördü. Bir süre uzaklara daldı ve yaşadıkları anları düşündü. Kimseye aldırış etmeden söyledikleri şarkılar, birlikte ıslanmak için bir kenara attıkları şemsiyeler, yağmur altında yollarının düştüğü sazlıkta geçirdikleri o uzun akşam ve anlaşmazlık sonrasında bile eşinin soğuktan korumak için üzerine örttüğü ceketi. Ne kadar zaman geçmişti tüm bu yaşananların üzerinden? 25 yıl mı? Yoksa 30 mu? Tarihleri hatırlamakta zorlansa da, yaşanan o güzel anları ve onda bıraktığı duyguları unutamıyordu. Şimdiyse aynı adam, hayatını paylaştığı o adam, çocuklarının babası olan o adam, geçirdiği kazadan beri komadaydı ve kadının elinden hiçbir şey gelmiyordu. Geçmişte hayatla tehlikeli oyunlar oynadıkları çok olmuştu. O zamanlar bütün bunların sonunda eve birlikte döneceklerinden nedense hep emin olmuşlardı. Şimdiyse ilk kez bu oyunun kurallarını bilmiyordu. O sırada gözüne, ilerideki oyun parkında kaydıraktan kaymakta olan çocuk ilişti. O çocuk gerçekten orada mıydı yoksa geçmişin bir hatırası mıydı gözlerinin önüne gelen? Çocuğu izlemeye koyuldu. Çocuğun yağmura aldırış etmeden kendi mutluluğunu etrafa saçtığını gördü. Parkın kenarında çocuğun annesi olduğunu düşündüğü bir kadın gördü. Kadın hararetli bir telefon konuşması yapıyordu ve kadının tüm dikkati çocuktan uzaklaşmıştı. Çocuğun annesini sorumsuzlukla suçlamakla, çocuğun hayatını yaşamasına izin verdiğini düşünmek arasında gidip geliyordu. Birden eşinin de yıllar önce Ponyo animasyonundaki ana karakterin annesi için "sorumsuz anne" diyerek kendisiyle uğraştığı aklına geldi ve gözleri doldu. O sırada çocuğun ona doğru döndüğünü ve el salladığını gördü. Koca hastanede onca pencere varken çocuğun gerçekten kendisine el sallayıp sallamadığını bilemese de, hiç düşünmeden o da çocuğa doğru el sallamaya başladı. Bir süre sonra doktor odaya girdi ve rutin kontrollerini yapmak için adama yaklaştı. Kadın doktora dönüp sordu: "Sizce daha ne kadar bu durumda kalacak?"
+Kadın bir anlığına gözlerini kapatabilmiş ve birkaç dakika da olsa uyuyabilmişti. Gözlerini açtığında yine aynı yerde olduğunu gördü. O steril hastane kokusu ve kulağına ritmik bir şekilde gelen monitör sesi. Döndü ve eşine baktı. Hâlâ tepkisizce yatıyordu. "En azından birimiz dinlenebiliyoruz" diye düşündü ve bir anlığına tebessüm etti.
 
-Uzun nöbetinin yorgunluğuna rağmen doktor anlayışlı bir sesle yanıtladı: "Maalesef şu anda net bir şey söylemek mümkün değil. Ama elimizden gelen her şeyi yapıyoruz. Umudunuzu kaybetmeyin lütfen." Kadın devam etti: "Yine de burada hiçbir şey yapamadan beklemek çok zor. Biz bugüne kadar karşılaştığımız tüm zorluklarda hep beraberdik. Bir yol bulduk, çabaladık, ne yaşarsak yaşayalım birbirimize dönmeyi bildik. Anlayabiliyor musunuz?"
+Bacaklarını biraz hareket ettirmek için yavaşça ayağa kalktı ve ağır adımlarla pencereye doğru gitti. Pencereden dışarı baktığında, dün geceki yağmurun aralıksız bir şekilde devam ettiğini gördü. Bir süre uzaklara daldı ve yaşadıkları anları düşündü. Kimseye aldırış etmeden söyledikleri şarkılar, birlikte ıslanmak için bir kenara attıkları şemsiyeler, yağmur altında yollarının düştüğü sazlıkta geçirdikleri o uzun akşam ve anlaşmazlık sonrasında bile eşinin soğuktan korumak için üzerine örttüğü ceketi.
 
-Doktor bir an için sessiz kaldı. "Anlıyorum. Beklemek bazen yapabileceğimiz en zor şey oluyor. Siz de biraz dinlenseniz iyi olur, kaç gündür buradan hiç ayrılmadınız." Kadın derin bir iç çekti ve yavaşça refakatçi koltuğuna doğru hareketlendi. O sırada doktora: "Teşekkür ederim, gerçekten" dedi. Doktorun odadan ayrılmasının ardından koltuğunu eşinin yatağına yaklaştırdı. Önce üşümemesi için eşinin üzerindeki çarşafı güzelce düzeltti. Sonra da eşinin hareketsiz duran elini sıkıca kavradı ve tekrar beklemeye başladı.
+Ne kadar zaman geçmişti tüm bu yaşananların üzerinden? 25 yıl mı? Yoksa 30 mu? Tarihleri hatırlamakta zorlansa da, yaşanan o güzel anları ve onda bıraktığı duyguları unutamıyordu. Şimdiyse aynı adam, hayatını paylaştığı o adam, çocuklarının babası olan o adam, geçirdiği kazadan beri komadaydı ve kadının elinden hiçbir şey gelmiyordu. Geçmişte hayatla tehlikeli oyunlar oynadıkları çok olmuştu. O zamanlar bütün bunların sonunda eve birlikte döneceklerinden nedense hep emin olmuşlardı. Şimdiyse ilk kez bu oyunun kurallarını bilmiyordu.
+
+O sırada gözüne, ilerideki oyun parkında kaydıraktan kaymakta olan çocuk ilişti. O çocuk gerçekten orada mıydı yoksa geçmişin bir hatırası mıydı gözlerinin önüne gelen? Çocuğu izlemeye koyuldu. Çocuğun yağmura aldırış etmeden kendi mutluluğunu etrafa saçtığını gördü. Parkın kenarında çocuğun annesi olduğunu düşündüğü bir kadın gördü. Kadın hararetli bir telefon konuşması yapıyordu ve kadının tüm dikkati çocuktan uzaklaşmıştı. Çocuğun annesini sorumsuzlukla suçlamakla, çocuğun hayatını yaşamasına izin verdiğini düşünmek arasında gidip geliyordu.
+
+Birden eşinin de yıllar önce Ponyo animasyonundaki ana karakterin annesi için "sorumsuz anne" diyerek kendisiyle uğraştığı aklına geldi ve gözleri doldu. O sırada çocuğun ona doğru döndüğünü ve el salladığını gördü. Koca hastanede onca pencere varken çocuğun gerçekten kendisine el sallayıp sallamadığını bilemese de, hiç düşünmeden o da çocuğa doğru el sallamaya başladı.
+
+Bir süre sonra doktor odaya girdi ve rutin kontrollerini yapmak için adama yaklaştı. Kadın doktora dönüp sordu:
+
+\- "Sizce daha ne kadar bu durumda kalacak?"
+
+Uzun nöbetinin yorgunluğuna rağmen doktor anlayışlı bir sesle yanıtladı:
+
+\- "Maalesef şu anda net bir şey söylemek mümkün değil. Ama elimizden gelen her şeyi yapıyoruz. Umudunuzu kaybetmeyin lütfen."
+
+Kadın devam etti:
+
+\- "Yine de burada hiçbir şey yapamadan beklemek çok zor. Biz bugüne kadar karşılaştığımız tüm zorluklarda hep beraberdik. Bir yol bulduk, çabaladık, ne yaşarsak yaşayalım birbirimize dönmeyi bildik. Anlayabiliyor musunuz?"
+
+Doktor bir an için sessiz kaldı.
+
+\- "Anlıyorum. Beklemek bazen yapabileceğimiz en zor şey oluyor. Siz de biraz dinlenseniz iyi olur, kaç gündür buradan hiç ayrılmadınız."
+
+Kadın derin bir iç çekti ve yavaşça refakatçi koltuğuna doğru hareketlendi. O sırada doktora:
+
+\- "Teşekkür ederim, gerçekten" dedi.
+
+Doktorun odadan ayrılmasının ardından koltuğunu eşinin yatağına yaklaştırdı. Önce üşümemesi için eşinin üzerindeki çarşafı güzelce düzeltti. Sonra da eşinin hareketsiz duran elini sıkıca kavradı ve tekrar beklemeye başladı.
