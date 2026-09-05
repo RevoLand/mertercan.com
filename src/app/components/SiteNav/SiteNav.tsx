@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -10,14 +9,6 @@ const navItems = [
   { label: 'life', href: '/life' },
 ];
 
-function getAriaCurrent(isCurrent: boolean): 'page' | undefined {
-  if (isCurrent) {
-    return 'page';
-  }
-
-  return undefined;
-}
-
 export default function SiteNav() {
   const pathname = usePathname();
 
@@ -26,8 +17,8 @@ export default function SiteNav() {
       <nav className='siteHeader container-base' aria-label='Site' lang='en'>
         <Link
           href='/'
-          className={clsx('siteHeaderLink', pathname === '/' && 'is-current')}
-          aria-current={getAriaCurrent(pathname === '/')}
+          className={`siteHeaderLink${pathname === '/' ? ' is-current' : ''}`}
+          aria-current={pathname === '/' ? 'page' : undefined}
           translate='no'
         >
           mert ercan
@@ -40,8 +31,8 @@ export default function SiteNav() {
               <div key={item.href} className='flex items-center gap-2.5 sm:gap-4'>
                 <Link
                   href={item.href}
-                  className={clsx('siteHeaderLink', isCurrent && 'is-current')}
-                  aria-current={getAriaCurrent(isCurrent)}
+                  className={`siteHeaderLink${isCurrent ? ' is-current' : ''}`}
+                  aria-current={isCurrent ? 'page' : undefined}
                 >
                   {item.label}
                 </Link>

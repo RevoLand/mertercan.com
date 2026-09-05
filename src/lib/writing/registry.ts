@@ -452,10 +452,6 @@ const writingIndex = buildWritingIndex(loadWritings());
 
 export const writings = writingIndex.all;
 
-export function getDialogueWritings(): DialogueWriting[] {
-  return [...writingIndex.byGroup.denemeler];
-}
-
 export function getArticleWritings(): ArticleWriting[] {
   return [...writingIndex.byGroup.konusmalar];
 }

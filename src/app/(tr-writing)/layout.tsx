@@ -5,7 +5,6 @@ import SiteNav from '@/app/components/SiteNav';
 import { siteDescription, siteName, siteTitle, siteUrl } from '@/lib/seo';
 import '../globals.css';
 
-// eslint-disable-next-line new-cap
 const poppins = Poppins({
   subsets: ['latin', 'latin-ext'],
   weight: ['400', '500', '600'],
