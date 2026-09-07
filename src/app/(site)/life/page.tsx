@@ -79,6 +79,10 @@ const entries: Entry[] = [
         text: 'Arena continued with a sixteenth story about a frightened child finding calm in his father’s arms and returning to sleep beside his mother.',
         relatedLink: { href: '/writing/hikayeler/arena-xvi-yaninda', label: 'Arena XVI — Yanında' },
       },
+      {
+        text: 'Arena continued with a seventeenth story about a grandmother meeting her grandchild’s joy of rain and play with a mixture of concern and curiosity.',
+        relatedLink: { href: '/writing/hikayeler/arena-xvii-birlikte', label: 'Arena XVII — Birlikte' },
+      },
     ],
   },
   {
