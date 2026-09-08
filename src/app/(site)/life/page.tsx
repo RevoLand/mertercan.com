@@ -83,6 +83,10 @@ const entries: Entry[] = [
         text: 'Arena continued with a seventeenth story about a grandmother meeting her grandchild’s joy of rain and play with a mixture of concern and curiosity.',
         relatedLink: { href: '/writing/hikayeler/arena-xvii-birlikte', label: 'Arena XVII — Birlikte' },
       },
+      {
+        text: 'Arena continued with an eighteenth story about a young employee who solves a problem and finds herself facing the expectations that come with being seen.',
+        relatedLink: { href: '/writing/hikayeler/arena-xviii-bakis', label: 'Arena XVIII — Bakış' },
+      },
     ],
   },
   {
